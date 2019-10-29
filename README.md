@@ -57,7 +57,7 @@ This will return different colour containers depending on which device it's bein
 
 This widget can be seen as a duplicate of the `OrientationBuilder` that comes with Flutter, but the point of this library is to help you produce a readable responsive UI code base. As mentioned in the [follow along tutorial](https://youtu.be/udsysUj-X4w) I didn't want responsive code riddled with conditionals around orientation, `MediaQuery` or Renderbox sizes. That's why I created this builder.
 
-The usage is easy. Provider a builder function that returns a UI for each of the orientations. 
+The usage is easy. Provide a builder function that returns a UI for each of the orientations. 
 
 ```dart
 // import the package
