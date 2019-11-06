@@ -1,5 +1,6 @@
 library responsive_builder;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 enum DeviceScreenType { Mobile, Tablet, Desktop, Watch }
@@ -30,7 +31,10 @@ class ResponsiveBuilder extends StatelessWidget {
     BuildContext context,
     SizingInformation sizingInformation,
   ) builder;
-  const ResponsiveBuilder({Key key, this.builder}) : super(key: key);
+  const ResponsiveBuilder({
+    Key key,
+    this.builder,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -59,27 +63,24 @@ class ScreenTypeLayout extends StatelessWidget {
   final Widget mobile;
   final Widget tablet;
   final Widget desktop;
-
-  const ScreenTypeLayout({
-    Key key,
-    this.watch,
-    this.mobile,
-    this.tablet,
-    this.desktop,
-  }) : super(key: key);
+  const ScreenTypeLayout(
+      {Key key, this.watch, this.mobile, this.tablet, this.desktop})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ResponsiveBuilder(
       builder: (context, sizingInformation) {
-        if (sizingInformation.deviceScreenType == DeviceScreenType.Desktop &&
-            desktop != null) {
-          return desktop;
+        // If we're at desktop size
+        if (sizingInformation.deviceScreenType == DeviceScreenType.Desktop) {
+          // If we have supplied the desktop layout then display that
+          if (desktop != null) return desktop;
+          // If no desktop layout is supplied we want to check if we have the size below it and display that
+          if (tablet != null) return tablet;
         }
 
-        if (sizingInformation.deviceScreenType == DeviceScreenType.Tablet &&
-            tablet != null) {
-          return tablet;
+        if (sizingInformation.deviceScreenType == DeviceScreenType.Tablet) {
+          if (tablet != null) return tablet;
         }
 
         if (sizingInformation.deviceScreenType == DeviceScreenType.Watch &&
@@ -87,6 +88,7 @@ class ScreenTypeLayout extends StatelessWidget {
           return watch;
         }
 
+        // If none of the layouts above are supplied or we're on the mobile layout then we show the mobile layout
         return mobile;
       },
     );
@@ -122,6 +124,10 @@ class OrientationLayoutBuilder extends StatelessWidget {
 
 DeviceScreenType _getDeviceType(MediaQueryData mediaQuery) {
   double deviceWidth = mediaQuery.size.shortestSide;
+
+  if (kIsWeb) {
+    deviceWidth = mediaQuery.size.width;
+  }
 
   if (deviceWidth > 950) {
     return DeviceScreenType.Desktop;
