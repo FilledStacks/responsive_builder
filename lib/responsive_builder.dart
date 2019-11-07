@@ -11,6 +11,14 @@ class SizingInformation {
   final Size screenSize;
   final Size localWidgetSize;
 
+  bool get isMobile => deviceScreenType == DeviceScreenType.Mobile;
+
+  bool get isTablet => deviceScreenType == DeviceScreenType.Tablet;
+
+  bool get isDesktop => deviceScreenType == DeviceScreenType.Desktop;
+
+  bool get isWatch => deviceScreenType == DeviceScreenType.Watch;
+
   SizingInformation({
     this.deviceScreenType,
     this.screenSize,

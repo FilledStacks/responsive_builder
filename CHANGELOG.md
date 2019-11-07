@@ -9,3 +9,7 @@ Update the ScreenTypeLayout widget to use an incremental layout approach. If the
 ## [0.1.2] - 2019-11-06
 
 Updated screen type calculation to account for being on the Web. Width was swapping with the height when it got too wide so we're checking for web explicitly and using the width of the window.
+
+## [0.1.3] - 2019-11-06
+
+Added shorthand bool properties to sizing information to check which device screen type is currently being show.
