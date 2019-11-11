@@ -31,6 +31,26 @@ class SizingInformation {
   }
 }
 
+/// Manually define screen resolution breakpoints
+///
+/// Overrides the defaults
+class ScreenBreakpoints {
+  final double watch;
+  final double tablet;
+  final double desktop;
+
+  ScreenBreakpoints({
+    @required this.desktop,
+    @required this.tablet,
+    @required this.watch
+  });
+
+  @override
+  String toString() {
+    return "Desktop: $desktop, Tablet: $tablet, Watch: $watch";
+  }
+}
+
 /// A widget with a builder that provides you with the sizingInformation
 ///
 /// This widget is used by the ScreenTypeLayout to provide different widget builders
@@ -39,9 +59,13 @@ class ResponsiveBuilder extends StatelessWidget {
     BuildContext context,
     SizingInformation sizingInformation,
   ) builder;
+
+  final ScreenBreakpoints breakpoints;
+
   const ResponsiveBuilder({
     Key key,
     this.builder,
+    this.breakpoints
   }) : super(key: key);
 
   @override
@@ -49,7 +73,7 @@ class ResponsiveBuilder extends StatelessWidget {
     return LayoutBuilder(builder: (context, boxConstraints) {
       var mediaQuery = MediaQuery.of(context);
       var sizingInformation = SizingInformation(
-        deviceScreenType: _getDeviceType(mediaQuery),
+        deviceScreenType: _getDeviceType(mediaQuery, breakpoints),
         screenSize: mediaQuery.size,
         localWidgetSize:
             Size(boxConstraints.maxWidth, boxConstraints.maxHeight),
@@ -62,22 +86,27 @@ class ResponsiveBuilder extends StatelessWidget {
 /// Provides a builder function for different screen types
 ///
 /// Each builder will get built based on the current device width.
+/// [breakpoints] define your own custom device resolutions
 /// [watch] will be built and shown when width is less than 300
 /// [mobile] will be built when width greater than 300
 /// [tablet] will be built when width is greater than 600
 /// [desktop] will be built if width is greater than 950
 class ScreenTypeLayout extends StatelessWidget {
+  
+  final ScreenBreakpoints breakpoints;
+  
   final Widget watch;
   final Widget mobile;
   final Widget tablet;
   final Widget desktop;
   const ScreenTypeLayout(
-      {Key key, this.watch, this.mobile, this.tablet, this.desktop})
+      {Key key, this.breakpoints, this.watch, this.mobile, this.tablet, this.desktop})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ResponsiveBuilder(
+      breakpoints: breakpoints,
       builder: (context, sizingInformation) {
         // If we're at desktop size
         if (sizingInformation.deviceScreenType == DeviceScreenType.Desktop) {
@@ -130,13 +159,29 @@ class OrientationLayoutBuilder extends StatelessWidget {
   }
 }
 
-DeviceScreenType _getDeviceType(MediaQueryData mediaQuery) {
+DeviceScreenType _getDeviceType(MediaQueryData mediaQuery, ScreenBreakpoints breakpoint) {
   double deviceWidth = mediaQuery.size.shortestSide;
 
   if (kIsWeb) {
     deviceWidth = mediaQuery.size.width;
   }
 
+  // Replaces the defaults with the user defined definitions 
+  if(breakpoint != null) {
+    if(deviceWidth > breakpoint.desktop) {
+      return DeviceScreenType.Desktop;
+    }
+
+    if(deviceWidth > breakpoint.tablet) {
+      return DeviceScreenType.Tablet;
+    }
+
+    if(deviceWidth < breakpoint.watch) {
+      return DeviceScreenType.Watch;
+    }
+  }
+
+  // If no user defined definitions are passed through use the defaults
   if (deviceWidth > 950) {
     return DeviceScreenType.Desktop;
   }
@@ -149,5 +194,8 @@ DeviceScreenType _getDeviceType(MediaQueryData mediaQuery) {
     return DeviceScreenType.Watch;
   }
 
-  return DeviceScreenType.Mobile;
+  return DeviceScreenType.Mobile;   
 }
+
+
+

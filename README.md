@@ -89,6 +89,26 @@ ScreenTypeLayout(
 );
 ```
 
+## Custom Screen Definitions
+If you wish to define your own custom screen definitions you can do so by supplying either the `ScreenTypeLayout` or `ResponsiveBuilder` widgets with a `definitions` argument.
+``` dart
+// import the package
+import 'package:responsive_builder/responsive_builder.dart';
+
+//ScreenTypeLayout with custom definitions supplied
+ScreenTypeLayout(
+  definitions: ScreenDefinitions(
+    tablet: 600,
+    desktop: 950,
+    watch: 300
+  ),
+  mobile: Container(color:Colors.blue)
+  tablet: Container(color: Colors.yellow),
+  desktop: Container(color: Colors.red),
+  watch: Container(color: Colors.purple),
+);
+```
+
 To get a more in depth run through of this package I would highly recommend [watching this tutorial](https://youtu.be/udsysUj-X4w) where I show you how it was built and how to use it.
 
 ## Contribution
