@@ -13,3 +13,7 @@ Updated screen type calculation to account for being on the Web. Width was swapp
 ## [0.1.3] - 2019-11-06
 
 Added shorthand bool properties to sizing information to check which device screen type is currently being show.
+
+## [0.1.4] - 2019-11-11
+
+Added optional screen break points definition to pass in to the ResponsiveBuilder or the ScreenLayoutView.
