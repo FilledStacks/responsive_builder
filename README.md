@@ -89,15 +89,16 @@ ScreenTypeLayout(
 );
 ```
 
-## Custom Screen Definitions
-If you wish to define your own custom screen definitions you can do so by supplying either the `ScreenTypeLayout` or `ResponsiveBuilder` widgets with a `definitions` argument.
+## Custom Screen Breakpoints
+If you wish to define your own custom break points you can do so by supplying either the `ScreenTypeLayout` or `ResponsiveBuilder` widgets with a `breakpoints` argument.
+
 ``` dart
 // import the package
 import 'package:responsive_builder/responsive_builder.dart';
 
-//ScreenTypeLayout with custom definitions supplied
+//ScreenTypeLayout with custom breakpoints supplied
 ScreenTypeLayout(
-  definitions: ScreenDefinitions(
+  breakpoints: ScreenBreakpoints(
     tablet: 600,
     desktop: 950,
     watch: 300
