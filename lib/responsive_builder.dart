@@ -9,6 +9,7 @@ enum DeviceScreenType { Mobile, Tablet, Desktop, Watch }
 
 /// Contains sizing information to make responsive choices for the current screen
 class SizingInformation {
+  final Orientation orientation;
   final DeviceScreenType deviceScreenType;
   final Size screenSize;
   final Size localWidgetSize;
@@ -22,6 +23,7 @@ class SizingInformation {
   bool get isWatch => deviceScreenType == DeviceScreenType.Watch;
 
   SizingInformation({
+    this.orientation,
     this.deviceScreenType,
     this.screenSize,
     this.localWidgetSize,
@@ -29,7 +31,7 @@ class SizingInformation {
 
   @override
   String toString() {
-    return 'DeviceType:$deviceScreenType ScreenSize:$screenSize LocalWidgetSize:$localWidgetSize';
+    return 'DeviceType:$deviceScreenType Orientation: $orientation ScreenSize:$screenSize LocalWidgetSize:$localWidgetSize';
   }
 }
 
@@ -75,6 +77,7 @@ class ResponsiveBuilder extends StatelessWidget {
     return LayoutBuilder(builder: (context, boxConstraints) {
       var mediaQuery = MediaQuery.of(context);
       var sizingInformation = SizingInformation(
+        orientation: mediaQuery.orientation,
         deviceScreenType: _getDeviceType(mediaQuery, breakpoints),
         screenSize: mediaQuery.size,
         localWidgetSize:
