@@ -17,3 +17,7 @@ Added shorthand bool properties to sizing information to check which device scre
 ## [0.1.4] - 2019-11-11
 
 Added optional screen break points definition to pass in to the ResponsiveBuilder or the ScreenLayoutView.
+
+## [0.1.5] - 2020-04-03
+
+Added optional enforcing for an certain Orientation to the OrientationLayoutBuilder.

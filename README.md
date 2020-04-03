@@ -2,7 +2,7 @@
 
 The responsive builder package contains widgets that allows you to create a readable responsive UI. The package is inspired by the [Responsive UI Flutter series](https://www.youtube.com/playlist?list=PLQQBiNtFxeyJbOkeKBe_JG36gm1V2629H) created by FilledStacks.
 
-It aims to provide you with widgets that make it easy to build different UI's along two different Axis. Orientation x ScreenType. This means you can have a separate layout for Mobile - Landscape, Mobile - Portrait, Tablet - Landscape and Tablet-Portrait. 
+It aims to provide you with widgets that make it easy to build different UI's along two different Axis. Orientation x ScreenType. This means you can have a separate layout for Mobile - Landscape, Mobile - Portrait, Tablet - Landscape and Tablet-Portrait.
 
 If you follow along with the series you will have a complete understanding of how it's built and how to use it. [Part 2](https://youtu.be/udsysUj-X4w) goes over how we build the example included in this project.
 
@@ -57,7 +57,7 @@ This will return different colour containers depending on which device it's bein
 
 This widget can be seen as a duplicate of the `OrientationBuilder` that comes with Flutter, but the point of this library is to help you produce a readable responsive UI code base. As mentioned in the [follow along tutorial](https://youtu.be/udsysUj-X4w) I didn't want responsive code riddled with conditionals around orientation, `MediaQuery` or Renderbox sizes. That's why I created this builder.
 
-The usage is easy. Provide a builder function that returns a UI for each of the orientations. 
+The usage is easy. Provide a builder function that returns a UI for each of the orientations.
 
 ```dart
 // import the package
@@ -72,9 +72,11 @@ OrientationLayoutBuilder(
 
 This will return a different coloured container when you swap orientations for your device. In a more readable manner than checking the orientation with a conditional.
 
+Sometimes you want your app to stay in a certain orientation. use `enforcePortrait` or `enforceLandscape` in `OrientationLayoutBuilder` to enforce this.
+
 ## Screen Type Layout
 
-This widget is similar to the Orientation Layout Builder in that it takes in Widgets that are named and displayed for different screen types. 
+This widget is similar to the Orientation Layout Builder in that it takes in Widgets that are named and displayed for different screen types.
 
 ```dart
 // import the package
@@ -102,9 +104,10 @@ ScreenTypeLayout.builder(
 ```
 
 ## Custom Screen Breakpoints
+
 If you wish to define your own custom break points you can do so by supplying either the `ScreenTypeLayout` or `ResponsiveBuilder` widgets with a `breakpoints` argument.
 
-``` dart
+```dart
 // import the package
 import 'package:responsive_builder/responsive_builder.dart';
 

@@ -2,6 +2,7 @@ library responsive_builder;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 typedef WidgetBuilder = Widget Function(BuildContext);
 
@@ -41,11 +42,8 @@ class ScreenBreakpoints {
   final double tablet;
   final double desktop;
 
-  ScreenBreakpoints({
-    @required this.desktop,
-    @required this.tablet,
-    @required this.watch
-  });
+  ScreenBreakpoints(
+      {@required this.desktop, @required this.tablet, @required this.watch});
 
   @override
   String toString() {
@@ -64,11 +62,8 @@ class ResponsiveBuilder extends StatelessWidget {
 
   final ScreenBreakpoints breakpoints;
 
-  const ResponsiveBuilder({
-    Key key,
-    this.builder,
-    this.breakpoints
-  }) : super(key: key);
+  const ResponsiveBuilder({Key key, this.builder, this.breakpoints})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -94,24 +89,33 @@ class ResponsiveBuilder extends StatelessWidget {
 /// [tablet] will be built when width is greater than 600
 /// [desktop] will be built if width is greater than 950
 class ScreenTypeLayout extends StatelessWidget {
-  
   final ScreenBreakpoints breakpoints;
-  
+
   final WidgetBuilder watch;
   final WidgetBuilder mobile;
   final WidgetBuilder tablet;
   final WidgetBuilder desktop;
 
   ScreenTypeLayout(
-      {Key key, this.breakpoints, Widget watch, Widget mobile, Widget tablet, Widget desktop}) :
-      this.watch = _builderOrNull(watch),
-      this.mobile = _builderOrNull(mobile),
-      this.tablet = _builderOrNull(tablet),
-      this.desktop = _builderOrNull(desktop),
-      super(key: key);
+      {Key key,
+      this.breakpoints,
+      Widget watch,
+      Widget mobile,
+      Widget tablet,
+      Widget desktop})
+      : this.watch = _builderOrNull(watch),
+        this.mobile = _builderOrNull(mobile),
+        this.tablet = _builderOrNull(tablet),
+        this.desktop = _builderOrNull(desktop),
+        super(key: key);
 
   const ScreenTypeLayout.builder(
-      {Key key, this.breakpoints, this.watch, this.mobile, this.tablet, this.desktop})
+      {Key key,
+      this.breakpoints,
+      this.watch,
+      this.mobile,
+      this.tablet,
+      this.desktop})
       : super(key: key);
 
   static WidgetBuilder _builderOrNull(Widget widget) {
@@ -148,23 +152,58 @@ class ScreenTypeLayout extends StatelessWidget {
 }
 
 /// Provides a builder function for a landscape and portrait widget
+/// [landscape] widget to render when device in landscape
+/// [portrait] widget to render when device in portrait
+/// [enforcePortrait] disables screenrotation and enforces device to portrait
+/// [enforceLandscape] disables screenrotation and enforces device to landscape
 class OrientationLayoutBuilder extends StatelessWidget {
   final WidgetBuilder landscape;
   final WidgetBuilder portrait;
-  const OrientationLayoutBuilder({
-    Key key,
-    this.landscape,
-    this.portrait,
-  }) : super(key: key);
+  final bool enforcePortrait;
+  final bool enforceLandscape;
+  const OrientationLayoutBuilder(
+      {Key key,
+      this.landscape,
+      this.portrait,
+      this.enforcePortrait = false,
+      this.enforceLandscape = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    if (enforcePortrait && enforceLandscape) {
+      throw new Exception(
+          'Choose either enforcing both orientations is not an option');
+    }
+
+    // forces device to portrait
+    if (enforcePortrait) {
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+      ]);
+
+      if (portrait == null) {
+        throw new Exception('variable portrait required');
+      }
+    }
+
+    // forces device to landscape
+    if (enforceLandscape) {
+      SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
+
+      if (landscape == null) {
+        throw new Exception('variable landscape required');
+      }
+    }
+
     return Builder(
       builder: (context) {
-        var orientation = MediaQuery.of(context).orientation;
-        if (orientation == Orientation.landscape) {
-          if (landscape != null) {
-            return landscape(context);
+        if (!enforcePortrait) {
+          var orientation = MediaQuery.of(context).orientation;
+          if (orientation == Orientation.landscape || enforceLandscape) {
+            if (landscape != null) {
+              return landscape(context);
+            }
           }
         }
 
@@ -174,24 +213,25 @@ class OrientationLayoutBuilder extends StatelessWidget {
   }
 }
 
-DeviceScreenType _getDeviceType(MediaQueryData mediaQuery, ScreenBreakpoints breakpoint) {
+DeviceScreenType _getDeviceType(
+    MediaQueryData mediaQuery, ScreenBreakpoints breakpoint) {
   double deviceWidth = mediaQuery.size.shortestSide;
 
   if (kIsWeb) {
     deviceWidth = mediaQuery.size.width;
   }
 
-  // Replaces the defaults with the user defined definitions 
-  if(breakpoint != null) {
-    if(deviceWidth > breakpoint.desktop) {
+  // Replaces the defaults with the user defined definitions
+  if (breakpoint != null) {
+    if (deviceWidth > breakpoint.desktop) {
       return DeviceScreenType.Desktop;
     }
 
-    if(deviceWidth > breakpoint.tablet) {
+    if (deviceWidth > breakpoint.tablet) {
       return DeviceScreenType.Tablet;
     }
 
-    if(deviceWidth < breakpoint.watch) {
+    if (deviceWidth < breakpoint.watch) {
       return DeviceScreenType.Watch;
     }
   }
@@ -209,8 +249,5 @@ DeviceScreenType _getDeviceType(MediaQueryData mediaQuery, ScreenBreakpoints bre
     return DeviceScreenType.Watch;
   }
 
-  return DeviceScreenType.Mobile;   
+  return DeviceScreenType.Mobile;
 }
-
-
-
