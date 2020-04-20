@@ -9,12 +9,19 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenTypeLayout(
-      breakpoints: ScreenBreakpoints(desktop: 900, tablet: 650, watch: 250),
-      mobile: OrientationLayoutBuilder(
+      breakpoints: ScreenBreakpoints(
+          watch: 300,
+          mobileSmall: 480,
+          mobileTabletNormal: 767,
+          tabletLarge: 1024,
+          monitorSmall: 1280,
+          monitorLarge: 1650,
+          monitorExtraLarge: 1650),
+      mobileTabletNormal: OrientationLayoutBuilder(
         portrait: (context) => HomeMobilePortrait(),
         landscape: (context) => HomeMobileLandscape(),
       ),
-      tablet: HomeViewTablet(),
+      tabletLarge: HomeViewTablet(),
     );
   }
 }
