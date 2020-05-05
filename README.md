@@ -89,6 +89,18 @@ ScreenTypeLayout(
 );
 ```
 
+If you don't want to build all the widgets at once, you can use the widget builder. A widget for the right type of screen will be created only when needed.
+
+```dart
+// Construct and pass in a widget builder per screen type
+ScreenTypeLayout.builder(
+  mobile: (BuildContext context) => Container(color:Colors.blue),
+  tablet: (BuildContext context) => Container(color:Colors.yellow),
+  desktop: (BuildContext context) => Container(color:Colors.red),
+  watch: (BuildContext context) => Container(color:Colors.purple),
+);
+```
+
 ## Custom Screen Breakpoints
 If you wish to define your own custom break points you can do so by supplying either the `ScreenTypeLayout` or `ResponsiveBuilder` widgets with a `breakpoints` argument.
 

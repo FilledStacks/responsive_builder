@@ -3,6 +3,8 @@ library responsive_builder;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+typedef WidgetBuilder = Widget Function(BuildContext);
+
 enum DeviceScreenType { Mobile, Tablet, Desktop, Watch }
 
 /// Contains sizing information to make responsive choices for the current screen
@@ -95,13 +97,26 @@ class ScreenTypeLayout extends StatelessWidget {
   
   final ScreenBreakpoints breakpoints;
   
-  final Widget watch;
-  final Widget mobile;
-  final Widget tablet;
-  final Widget desktop;
-  const ScreenTypeLayout(
+  final WidgetBuilder watch;
+  final WidgetBuilder mobile;
+  final WidgetBuilder tablet;
+  final WidgetBuilder desktop;
+
+  ScreenTypeLayout(
+      {Key key, this.breakpoints, Widget watch, Widget mobile, Widget tablet, Widget desktop}) :
+      this.watch = _builderOrNull(watch),
+      this.mobile = _builderOrNull(mobile),
+      this.tablet = _builderOrNull(tablet),
+      this.desktop = _builderOrNull(desktop),
+      super(key: key);
+
+  const ScreenTypeLayout.builder(
       {Key key, this.breakpoints, this.watch, this.mobile, this.tablet, this.desktop})
       : super(key: key);
+
+  static WidgetBuilder _builderOrNull(Widget widget) {
+    return widget == null ? null : ((_) => widget);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -111,22 +126,22 @@ class ScreenTypeLayout extends StatelessWidget {
         // If we're at desktop size
         if (sizingInformation.deviceScreenType == DeviceScreenType.Desktop) {
           // If we have supplied the desktop layout then display that
-          if (desktop != null) return desktop;
+          if (desktop != null) return desktop(context);
           // If no desktop layout is supplied we want to check if we have the size below it and display that
-          if (tablet != null) return tablet;
+          if (tablet != null) return tablet(context);
         }
 
         if (sizingInformation.deviceScreenType == DeviceScreenType.Tablet) {
-          if (tablet != null) return tablet;
+          if (tablet != null) return tablet(context);
         }
 
         if (sizingInformation.deviceScreenType == DeviceScreenType.Watch &&
             watch != null) {
-          return watch;
+          return watch(context);
         }
 
         // If none of the layouts above are supplied or we're on the mobile layout then we show the mobile layout
-        return mobile;
+        return mobile(context);
       },
     );
   }
@@ -134,8 +149,8 @@ class ScreenTypeLayout extends StatelessWidget {
 
 /// Provides a builder function for a landscape and portrait widget
 class OrientationLayoutBuilder extends StatelessWidget {
-  final Widget Function(BuildContext) landscape;
-  final Widget Function(BuildContext) portrait;
+  final WidgetBuilder landscape;
+  final WidgetBuilder portrait;
   const OrientationLayoutBuilder({
     Key key,
     this.landscape,
