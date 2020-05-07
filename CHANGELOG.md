@@ -1,3 +1,7 @@
+## 0.1.6
+
+- Added ScreenTypeValue builder to allow us to return different values depending on the screen type
+
 ## 0.1.4+1
 
 Changelog styling updates
