@@ -84,11 +84,11 @@ DeviceScreenType getDeviceType(MediaQueryData mediaQuery,
   }
 
   // If no user defined definitions are passed through use the defaults
-  if (deviceWidth > 950) {
+  if (deviceWidth >= 950) {
     return DeviceScreenType.Desktop;
   }
 
-  if (deviceWidth > 600) {
+  if (deviceWidth >= 600) {
     return DeviceScreenType.Tablet;
   }
 
