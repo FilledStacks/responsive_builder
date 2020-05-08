@@ -1,3 +1,7 @@
+## 0.1.7
+
+- Made 600 inclusive for tablet devices and 900 inclusive for desktop
+
 ## 0.1.6
 
 - Added ScreenTypeValue builder to allow us to return different values depending on the screen type
