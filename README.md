@@ -32,15 +32,15 @@ import 'package:responsive_builder/responsive_builder.dart';
 ResponsiveBuilder(
     builder: (context, sizingInformation) {
       // Check the sizing information here and return your UI
-          if (sizingInformation.deviceScreenType == DeviceScreenType.Desktop) {
+          if (sizingInformation.deviceScreenType == DeviceScreenType.desktop) {
           return Container(color:Colors.blue);
         }
 
-        if (sizingInformation.deviceScreenType == DeviceScreenType.Tablet) {
+        if (sizingInformation.deviceScreenType == DeviceScreenType.tablet) {
           return Container(color:Colors.red);
         }
 
-        if (sizingInformation.deviceScreenType == DeviceScreenType.Watch) {
+        if (sizingInformation.deviceScreenType == DeviceScreenType.watch) {
           return Container(color:Colors.yellow);
         }
 
