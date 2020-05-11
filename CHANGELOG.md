@@ -1,3 +1,11 @@
+## 0.1.9
+
+- Reverted the change for returning the mobile layout when break points doesn't define any.
+
+## 0.1.8+1
+
+- readme updates
+
 ## 0.1.8
 
 - Changed enum naming to lowerCamelCase to follow convention
