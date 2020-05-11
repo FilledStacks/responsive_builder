@@ -1,3 +1,8 @@
+## 0.1.8
+
+- Changed enum naming to lowerCamelCase to follow convention
+- Add a return for mobile when no breakpoints match
+
 ## 0.1.7
 
 - Made 600 inclusive for tablet devices and 900 inclusive for desktop
