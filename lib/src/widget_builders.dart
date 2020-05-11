@@ -81,8 +81,6 @@ DeviceScreenType getDeviceType(MediaQueryData mediaQuery,
     if (deviceWidth < breakpoint.watch) {
       return DeviceScreenType.watch;
     }
-
-    return DeviceScreenType.mobile;
   }
 
   // If no user defined definitions are passed through use the defaults
