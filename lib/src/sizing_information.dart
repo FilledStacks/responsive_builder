@@ -7,13 +7,13 @@ class SizingInformation {
   final Size screenSize;
   final Size localWidgetSize;
 
-  bool get isMobile => deviceScreenType == DeviceScreenType.Mobile;
+  bool get isMobile => deviceScreenType == DeviceScreenType.mobile;
 
-  bool get isTablet => deviceScreenType == DeviceScreenType.Tablet;
+  bool get isTablet => deviceScreenType == DeviceScreenType.tablet;
 
-  bool get isDesktop => deviceScreenType == DeviceScreenType.Desktop;
+  bool get isDesktop => deviceScreenType == DeviceScreenType.desktop;
 
-  bool get isWatch => deviceScreenType == DeviceScreenType.Watch;
+  bool get isWatch => deviceScreenType == DeviceScreenType.watch;
 
   SizingInformation({
     this.deviceScreenType,
@@ -35,8 +35,11 @@ class ScreenBreakpoints {
   final double tablet;
   final double desktop;
 
-  ScreenBreakpoints(
-      {@required this.desktop, @required this.tablet, @required this.watch});
+  ScreenBreakpoints({
+    @required this.desktop,
+    @required this.tablet,
+    @required this.watch,
+  });
 
   @override
   String toString() {

@@ -54,18 +54,18 @@ class ScreenTypeLayout extends StatelessWidget {
       breakpoints: breakpoints,
       builder: (context, sizingInformation) {
         // If we're at desktop size
-        if (sizingInformation.deviceScreenType == DeviceScreenType.Desktop) {
+        if (sizingInformation.deviceScreenType == DeviceScreenType.desktop) {
           // If we have supplied the desktop layout then display that
           if (desktop != null) return desktop(context);
           // If no desktop layout is supplied we want to check if we have the size below it and display that
           if (tablet != null) return tablet(context);
         }
 
-        if (sizingInformation.deviceScreenType == DeviceScreenType.Tablet) {
+        if (sizingInformation.deviceScreenType == DeviceScreenType.tablet) {
           if (tablet != null) return tablet(context);
         }
 
-        if (sizingInformation.deviceScreenType == DeviceScreenType.Watch &&
+        if (sizingInformation.deviceScreenType == DeviceScreenType.watch &&
             watch != null) {
           return watch(context);
         }
@@ -87,18 +87,18 @@ class ScreenTypeValueBuilder<T> {
   }) {
     var deviceScreenType = getDeviceType(MediaQuery.of(context));
     // If we're at desktop size
-    if (deviceScreenType == DeviceScreenType.Desktop) {
+    if (deviceScreenType == DeviceScreenType.desktop) {
       // If we have supplied the desktop layout then display that
       if (desktop != null) return desktop;
       // If no desktop layout is supplied we want to check if we have the size below it and display that
       if (tablet != null) return tablet;
     }
 
-    if (deviceScreenType == DeviceScreenType.Tablet) {
+    if (deviceScreenType == DeviceScreenType.tablet) {
       if (tablet != null) return tablet;
     }
 
-    if (deviceScreenType == DeviceScreenType.Watch && watch != null) {
+    if (deviceScreenType == DeviceScreenType.watch && watch != null) {
       return watch;
     }
 

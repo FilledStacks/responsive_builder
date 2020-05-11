@@ -71,30 +71,32 @@ DeviceScreenType getDeviceType(MediaQueryData mediaQuery,
   // Replaces the defaults with the user defined definitions
   if (breakpoint != null) {
     if (deviceWidth > breakpoint.desktop) {
-      return DeviceScreenType.Desktop;
+      return DeviceScreenType.desktop;
     }
 
     if (deviceWidth > breakpoint.tablet) {
-      return DeviceScreenType.Tablet;
+      return DeviceScreenType.tablet;
     }
 
     if (deviceWidth < breakpoint.watch) {
-      return DeviceScreenType.Watch;
+      return DeviceScreenType.watch;
     }
+
+    return DeviceScreenType.mobile;
   }
 
   // If no user defined definitions are passed through use the defaults
   if (deviceWidth >= 950) {
-    return DeviceScreenType.Desktop;
+    return DeviceScreenType.desktop;
   }
 
   if (deviceWidth >= 600) {
-    return DeviceScreenType.Tablet;
+    return DeviceScreenType.tablet;
   }
 
   if (deviceWidth < 300) {
-    return DeviceScreenType.Watch;
+    return DeviceScreenType.watch;
   }
 
-  return DeviceScreenType.Mobile;
+  return DeviceScreenType.mobile;
 }
