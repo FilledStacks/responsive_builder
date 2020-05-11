@@ -35,7 +35,7 @@ class ScreenBreakpoints {
   final double tablet;
   final double desktop;
 
-  ScreenBreakpoints({
+  const ScreenBreakpoints({
     @required this.desktop,
     @required this.tablet,
     @required this.watch,
