@@ -1,3 +1,6 @@
+## 0.2.0+1
+- export the sizing config which I forgot to do first time.
+
 ## 0.2.0
 
 - Adds responsive sizing config for global breakpoint setting
