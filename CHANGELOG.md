@@ -1,3 +1,7 @@
+## 0.2.0
+
+- Adds responsive sizing config for global breakpoint setting
+
 ## 0.1.9
 
 - Reverted the change for returning the mobile layout when break points doesn't define any.
