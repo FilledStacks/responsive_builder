@@ -23,7 +23,7 @@ class ResponsiveBuilder extends StatelessWidget {
     return LayoutBuilder(builder: (context, boxConstraints) {
       var mediaQuery = MediaQuery.of(context);
       var sizingInformation = SizingInformation(
-        deviceScreenType: getDeviceType(mediaQuery, breakpoints),
+        deviceScreenType: getDeviceType(mediaQuery.size, breakpoints),
         screenSize: mediaQuery.size,
         localWidgetSize:
             Size(boxConstraints.maxWidth, boxConstraints.maxHeight),
@@ -60,12 +60,14 @@ class OrientationLayoutBuilder extends StatelessWidget {
   }
 }
 
-DeviceScreenType getDeviceType(MediaQueryData mediaQuery,
-    [ScreenBreakpoints breakpoint]) {
-  double deviceWidth = mediaQuery.size.shortestSide;
+DeviceScreenType getDeviceType(
+  Size size, [
+  ScreenBreakpoints breakpoint,
+]) {
+  double deviceWidth = size.shortestSide;
 
   if (kIsWeb) {
-    deviceWidth = mediaQuery.size.width;
+    deviceWidth = size.width;
   }
 
   // Replaces the defaults with the user defined definitions
@@ -81,19 +83,19 @@ DeviceScreenType getDeviceType(MediaQueryData mediaQuery,
     if (deviceWidth < breakpoint.watch) {
       return DeviceScreenType.watch;
     }
-  }
+  } else {
+    // If no user defined definitions are passed through use the defaults
+    if (deviceWidth >= 950) {
+      return DeviceScreenType.desktop;
+    }
 
-  // If no user defined definitions are passed through use the defaults
-  if (deviceWidth >= 950) {
-    return DeviceScreenType.desktop;
-  }
+    if (deviceWidth >= 600) {
+      return DeviceScreenType.tablet;
+    }
 
-  if (deviceWidth >= 600) {
-    return DeviceScreenType.tablet;
-  }
-
-  if (deviceWidth < 300) {
-    return DeviceScreenType.watch;
+    if (deviceWidth < 300) {
+      return DeviceScreenType.watch;
+    }
   }
 
   return DeviceScreenType.mobile;
