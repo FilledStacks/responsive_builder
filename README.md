@@ -140,6 +140,65 @@ void main() {
 
 This will then reflect the screen types based on what you have set here. You can then still pass in custom break points per `ScreenTypeLayout` if you wish that will override these values for that specific `ScreenTypeLayout` builder.
 
+## Screen Type specific values
+
+Sometimes you don't want to write an entire new UI just to change one value. Say for instance you want your padding on mobile to be 10, on the tablet 30 and desktop 60. Instead of re-writing UI you can use the `getValueForScreenType` function. This is a generic function that will return your value based on the screen type you're on. Take this example below.
+
+```dart
+Container(
+  padding: EdgeInsets.all(10),
+  child: Text('Best Responsive Package'),
+)
+```
+
+What if you ONLY want to update the padding based on the device screen size. You could do.
+
+```dart
+var deviceType = getDeviceType(MediaQuery.of(context).size);
+var paddingValue = 0;
+switch(deviceType) {
+  case DeviceScreenType.desktop:
+    paddingValue = 60;
+    break;
+  case DeviceScreenType.tablet:
+    paddingValue = 30;
+    break;
+  case DeviceScreenType.mobile:
+    paddingValue = 10;
+    break;
+}
+Container(
+  padding: EdgeInsets.all(paddingValue),
+  child: Text('Best Responsive Package'),
+)
+```
+
+Ooooorrrr, you can use shorthand for that.
+
+```dart
+Container(
+  padding: EdgeInsets.all(getValueForScreenType<double>(
+                context: context,
+                mobile: 10,
+                tablet: 30,
+                desktop: 60,
+              )),
+  child: Text('Best Responsive Package'),
+)
+```
+
+It will return the value you give it for the DeviceScreen you're viewing the app on. For instance you want to hide a widget on mobile and not on tablet?
+
+```dart
+getValueForScreenType<bool>(
+    context: context,
+    mobile: false,
+    tablet: true,
+  ) ? MyWidget() : Container()
+```
+
+That will return true on tablet devices and false on mobile.
+
 ## Contribution
 
 1. Fork it!

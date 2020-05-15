@@ -1,3 +1,7 @@
+## 0.2.0+2
+
+- Added `getValueForScreenType` functionality to the readme
+
 ## 0.2.0+1
 - export the sizing config which I forgot to do first time.
 
