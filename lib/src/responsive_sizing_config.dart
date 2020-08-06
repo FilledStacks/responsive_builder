@@ -41,18 +41,16 @@ class ResponsiveSizingConfig {
   RefinedBreakpoints _customRefinedBreakPoints;
 
   /// Set the breakPoints which will then be returned through the [breakpoints]
-  void setCustomBreakpoints(ScreenBreakpoints customBreakpoints) {
+  void setCustomBreakpoints(ScreenBreakpoints customBreakpoints,
+      {RefinedBreakpoints customRefinedBreakpoints}) {
     _customBreakPoints = customBreakpoints;
+    if (customRefinedBreakpoints != null) {
+      _customRefinedBreakPoints = customRefinedBreakpoints;
+    }
   }
 
   ScreenBreakpoints get breakpoints =>
       _customBreakPoints ?? _defaultBreakPoints;
-
-  /// Set the refinedBreakPoints which will then be returned through the [refinedBreakpoints]
-  void setCustomRefinedBreakpoints(
-      RefinedBreakpoints customRefinedBreakpoints) {
-    _customRefinedBreakPoints = customRefinedBreakpoints;
-  }
 
   RefinedBreakpoints get refinedBreakpoints =>
       _customRefinedBreakPoints ?? _defaultRefinedBreakPoints;
