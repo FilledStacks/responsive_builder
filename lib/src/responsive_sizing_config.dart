@@ -22,17 +22,17 @@ class ResponsiveSizingConfig {
   static const RefinedBreakpoints _defaultRefinedBreakPoints =
       const RefinedBreakpoints(
     // Desktop
-    desktopExtraLarge: 2160,
-    desktopLarge: 1440,
-    desktopNormal: 1080,
-    desktopSmall: 720,
+    desktopExtraLarge: 4096,
+    desktopLarge: 3840,
+    desktopNormal: 1920,
+    desktopSmall: 950,
     // Tablet
-    tabletExtraLarge: 1280,
-    tabletLarge: 1024,
+    tabletExtraLarge: 900,
+    tabletLarge: 850,
     tabletNormal: 768,
     tabletSmall: 600,
     // Mobile
-    mobileExtraLarge: 600,
+    mobileExtraLarge: 480,
     mobileLarge: 414,
     mobileNormal: 375,
     mobileSmall: 320,

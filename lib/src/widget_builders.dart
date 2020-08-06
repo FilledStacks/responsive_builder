@@ -17,8 +17,10 @@ class ResponsiveBuilder extends StatelessWidget {
   ) builder;
 
   final ScreenBreakpoints breakpoints;
+  final RefinedBreakpoints refinedBreakpoints;
 
-  const ResponsiveBuilder({Key key, this.builder, this.breakpoints})
+  const ResponsiveBuilder(
+      {Key key, this.builder, this.breakpoints, this.refinedBreakpoints})
       : super(key: key);
 
   @override
@@ -27,8 +29,7 @@ class ResponsiveBuilder extends StatelessWidget {
       var mediaQuery = MediaQuery.of(context);
       var sizingInformation = SizingInformation(
         deviceScreenType: getDeviceType(mediaQuery.size, breakpoints),
-        refinedSize:
-            getRefinedSize(getDeviceType(mediaQuery.size, breakpoints)),
+        refinedSize: getRefinedSize(mediaQuery.size, refinedBreakpoints),
         screenSize: mediaQuery.size,
         localWidgetSize:
             Size(boxConstraints.maxWidth, boxConstraints.maxHeight),
@@ -144,16 +145,17 @@ class ScreenTypeLayout extends StatelessWidget {
 /// [large] will be built when width is greater than 1440 on Desktops, 1024 on Tablets, and 414 on Mobiles
 /// [normal] will be built when width is greater than 1080 on Desktops, 768 on Tablets, and 375 on Mobiles
 /// [small] will be built if width is less than 720 on Desktops, 600 on Tablets, and 320 on Mobiles
-class RefinedSizeLayoutBuilder extends StatelessWidget {
-  final ScreenBreakpoints breakpoints;
+class RefinedLayoutBuilder extends StatelessWidget {
+  final RefinedBreakpoints refinedBreakpoints;
 
   final WidgetBuilder extraLarge;
   final WidgetBuilder large;
   final WidgetBuilder normal;
   final WidgetBuilder small;
 
-  const RefinedSizeLayoutBuilder({
+  const RefinedLayoutBuilder({
     Key key,
+    this.refinedBreakpoints,
     this.extraLarge,
     this.large,
     this.normal,
@@ -163,29 +165,37 @@ class RefinedSizeLayoutBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ResponsiveBuilder(
-      breakpoints: breakpoints,
+      refinedBreakpoints: refinedBreakpoints,
       builder: (context, sizingInformation) {
         // If we're at extra large size
-        if (refinedSize == RefinedSize.extraLarge) {
+        if (sizingInformation.refinedSize == RefinedSize.extraLarge) {
           // If we have supplied the extra large layout then display that
-          if (extraLarge != null) return extraLarge;
+          if (extraLarge != null) return extraLarge(context);
           // If no extra large layout is supplied we want to check if we have the size below it and display that
-          if (large != null) return large;
+          if (large != null) return large(context);
         }
 
-        if (refinedSize == RefinedSize.large) {
+        if (sizingInformation.refinedSize == RefinedSize.large) {
           // If we have supplied the large layout then display that
-          if (large != null) return large;
+          if (large != null) return large(context);
           // If no large layout is supplied we want to check if we have the size below it and display that
-          if (normal != null) return normal;
+          if (normal != null) return normal(context);
         }
 
-        if (refinedSize == RefinedSize.small && small != null) {
-          return small;
+        if (sizingInformation.refinedSize == RefinedSize.normal) {
+          // If we have supplied the normal layout then display that
+          if (normal != null) return normal(context);
+          // If no normal layout is supplied we want to check if we have the size below it and display that
+          if (small != null) return small(context);
+        }
+
+        if (sizingInformation.refinedSize == RefinedSize.small &&
+            small != null) {
+          return small(context);
         }
 
         // If none of the layouts above are supplied or we're on the normal size layout then we show the normal layout
-        return normal;
+        return normal(context);
       },
     );
   }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:responsive_builder/src/responsive_sizing_config.dart';
 import 'package:responsive_builder/src/sizing_information.dart';
 
+import '../responsive_builder.dart';
 import 'device_screen_type.dart';
 
 /// Returns the [DeviceScreenType] that the application is currently running on
@@ -14,6 +15,7 @@ DeviceScreenType getDeviceType(
 
   if (kIsWeb) {
     deviceWidth = size.width;
+    //return DeviceScreenType.desktop;
   }
 
   // Replaces the defaults with the user defined definitions
@@ -49,9 +51,10 @@ DeviceScreenType getDeviceType(
 
 /// Returns the [RefindedSize] for each device that the application is currently running on
 RefinedSize getRefinedSize(
-  DeviceScreenType deviceScreenType, [
+  Size size, [
   RefinedBreakpoints refinedBreakpoint,
 ]) {
+  DeviceScreenType deviceScreenType = getDeviceType(size);
   double deviceWidth = size.shortestSide;
 
   if (kIsWeb) {
@@ -69,7 +72,7 @@ RefinedSize getRefinedSize(
         return RefinedSize.large;
       }
 
-      if (deviceWidth < refinedBreakpoint.desktopNormal) {
+      if (deviceWidth > refinedBreakpoint.desktopNormal) {
         return RefinedSize.normal;
       }
 
@@ -87,7 +90,7 @@ RefinedSize getRefinedSize(
         return RefinedSize.large;
       }
 
-      if (deviceWidth < refinedBreakpoint.tabletNormal) {
+      if (deviceWidth > refinedBreakpoint.tabletNormal) {
         return RefinedSize.normal;
       }
 
@@ -105,7 +108,7 @@ RefinedSize getRefinedSize(
         return RefinedSize.large;
       }
 
-      if (deviceWidth < refinedBreakpoint.mobileNormal) {
+      if (deviceWidth > refinedBreakpoint.mobileNormal) {
         return RefinedSize.normal;
       }
 
@@ -133,7 +136,7 @@ RefinedSize getRefinedSize(
         return RefinedSize.large;
       }
 
-      if (deviceWidth <
+      if (deviceWidth >=
           ResponsiveSizingConfig.instance.refinedBreakpoints.desktopNormal) {
         return RefinedSize.normal;
       }
@@ -156,7 +159,7 @@ RefinedSize getRefinedSize(
         return RefinedSize.large;
       }
 
-      if (deviceWidth <
+      if (deviceWidth >=
           ResponsiveSizingConfig.instance.refinedBreakpoints.tabletNormal) {
         return RefinedSize.normal;
       }
@@ -179,7 +182,7 @@ RefinedSize getRefinedSize(
         return RefinedSize.large;
       }
 
-      if (deviceWidth <
+      if (deviceWidth >=
           ResponsiveSizingConfig.instance.refinedBreakpoints.mobileNormal) {
         return RefinedSize.normal;
       }
@@ -231,7 +234,7 @@ T getValueForRefinedSize<T>({
   T large,
   T extraLarge,
 }) {
-  var refinedSize = getRefinedSize(getDeviceType(MediaQuery.of(context).size));
+  var refinedSize = getRefinedSize(MediaQuery.of(context).size);
   // If we're at extra large size
   if (refinedSize == RefinedSize.extraLarge) {
     // If we have supplied the extra large layout then display that
@@ -245,6 +248,13 @@ T getValueForRefinedSize<T>({
     if (large != null) return large;
     // If no large layout is supplied we want to check if we have the size below it and display that
     if (normal != null) return normal;
+  }
+
+  if (refinedSize == RefinedSize.normal) {
+    // If we have supplied the normal layout then display that
+    if (normal != null) return normal;
+    // If no normal layout is supplied we want to check if we have the size below it and display that
+    if (small != null) return small;
   }
 
   if (refinedSize == RefinedSize.small && small != null) {
