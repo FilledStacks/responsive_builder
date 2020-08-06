@@ -15,7 +15,6 @@ DeviceScreenType getDeviceType(
 
   if (kIsWeb) {
     deviceWidth = size.width;
-    //return DeviceScreenType.desktop;
   }
 
   // Replaces the defaults with the user defined definitions
