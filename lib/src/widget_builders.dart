@@ -158,7 +158,7 @@ class RefinedLayoutBuilder extends StatelessWidget {
     this.refinedBreakpoints,
     this.extraLarge,
     this.large,
-    this.normal,
+    @required this.normal,
     this.small,
   }) : super(key: key);
 
