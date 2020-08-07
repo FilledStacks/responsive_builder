@@ -50,13 +50,14 @@ DeviceScreenType getDeviceType(
 
 /// Returns the [RefindedSize] for each device that the application is currently running on
 RefinedSize getRefinedSize(
-  Size size, [
+  Size size, {
   RefinedBreakpoints refinedBreakpoint,
-]) {
+  bool isWebOrDesktop = kIsWeb,
+}) {
   DeviceScreenType deviceScreenType = getDeviceType(size);
   double deviceWidth = size.shortestSide;
 
-  if (kIsWeb) {
+  if (isWebOrDesktop) {
     deviceWidth = size.width;
   }
 
@@ -163,8 +164,8 @@ RefinedSize getRefinedSize(
         return RefinedSize.normal;
       }
 
-      if (deviceWidth <
-          ResponsiveSizingConfig.instance.refinedBreakpoints.tabletSmall) {
+      if (deviceWidth >
+          ResponsiveSizingConfig.instance.refinedBreakpoints.mobileExtraLarge) {
         return RefinedSize.small;
       }
     }

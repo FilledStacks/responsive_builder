@@ -29,7 +29,10 @@ class ResponsiveBuilder extends StatelessWidget {
       var mediaQuery = MediaQuery.of(context);
       var sizingInformation = SizingInformation(
         deviceScreenType: getDeviceType(mediaQuery.size, breakpoints),
-        refinedSize: getRefinedSize(mediaQuery.size, refinedBreakpoints),
+        refinedSize: getRefinedSize(
+          mediaQuery.size,
+          refinedBreakpoint: refinedBreakpoints,
+        ),
         screenSize: mediaQuery.size,
         localWidgetSize:
             Size(boxConstraints.maxWidth, boxConstraints.maxHeight),
