@@ -17,8 +17,10 @@ class ResponsiveBuilder extends StatelessWidget {
   ) builder;
 
   final ScreenBreakpoints breakpoints;
+  final RefinedBreakpoints refinedBreakpoints;
 
-  const ResponsiveBuilder({Key key, this.builder, this.breakpoints})
+  const ResponsiveBuilder(
+      {Key key, this.builder, this.breakpoints, this.refinedBreakpoints})
       : super(key: key);
 
   @override
@@ -27,6 +29,7 @@ class ResponsiveBuilder extends StatelessWidget {
       var mediaQuery = MediaQuery.of(context);
       var sizingInformation = SizingInformation(
         deviceScreenType: getDeviceType(mediaQuery.size, breakpoints),
+        refinedSize: getRefinedSize(mediaQuery.size, refinedBreakpoints),
         screenSize: mediaQuery.size,
         localWidgetSize:
             Size(boxConstraints.maxWidth, boxConstraints.maxHeight),
@@ -129,6 +132,70 @@ class ScreenTypeLayout extends StatelessWidget {
 
         // If none of the layouts above are supplied or we're on the mobile layout then we show the mobile layout
         return mobile(context);
+      },
+    );
+  }
+}
+
+/// Provides a builder function for refined screen sizes to be used with [ScreenTypeLayout]
+///
+/// Each builder will get built based on the current device width.
+/// [breakpoints] define your own custom device resolutions
+/// [extraLarge] will be built if width is greater than 2160 on Desktops, 1280 on Tablets, and 600 on Mobiles
+/// [large] will be built when width is greater than 1440 on Desktops, 1024 on Tablets, and 414 on Mobiles
+/// [normal] will be built when width is greater than 1080 on Desktops, 768 on Tablets, and 375 on Mobiles
+/// [small] will be built if width is less than 720 on Desktops, 600 on Tablets, and 320 on Mobiles
+class RefinedLayoutBuilder extends StatelessWidget {
+  final RefinedBreakpoints refinedBreakpoints;
+
+  final WidgetBuilder extraLarge;
+  final WidgetBuilder large;
+  final WidgetBuilder normal;
+  final WidgetBuilder small;
+
+  const RefinedLayoutBuilder({
+    Key key,
+    this.refinedBreakpoints,
+    this.extraLarge,
+    this.large,
+    @required this.normal,
+    this.small,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ResponsiveBuilder(
+      refinedBreakpoints: refinedBreakpoints,
+      builder: (context, sizingInformation) {
+        // If we're at extra large size
+        if (sizingInformation.refinedSize == RefinedSize.extraLarge) {
+          // If we have supplied the extra large layout then display that
+          if (extraLarge != null) return extraLarge(context);
+          // If no extra large layout is supplied we want to check if we have the size below it and display that
+          if (large != null) return large(context);
+        }
+
+        if (sizingInformation.refinedSize == RefinedSize.large) {
+          // If we have supplied the large layout then display that
+          if (large != null) return large(context);
+          // If no large layout is supplied we want to check if we have the size below it and display that
+          if (normal != null) return normal(context);
+        }
+
+        if (sizingInformation.refinedSize == RefinedSize.normal) {
+          // If we have supplied the normal layout then display that
+          if (normal != null) return normal(context);
+          // If no normal layout is supplied we want to check if we have the size below it and display that
+          if (small != null) return small(context);
+        }
+
+        if (sizingInformation.refinedSize == RefinedSize.small &&
+            small != null) {
+          return small(context);
+        }
+
+        // If none of the layouts above are supplied or we're on the normal size layout then we show the normal layout
+        return normal(context);
       },
     );
   }

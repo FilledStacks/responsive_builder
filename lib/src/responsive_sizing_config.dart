@@ -19,11 +19,39 @@ class ResponsiveSizingConfig {
 
   ScreenBreakpoints _customBreakPoints;
 
+  static const RefinedBreakpoints _defaultRefinedBreakPoints =
+      const RefinedBreakpoints(
+    // Desktop
+    desktopExtraLarge: 4096,
+    desktopLarge: 3840,
+    desktopNormal: 1920,
+    desktopSmall: 950,
+    // Tablet
+    tabletExtraLarge: 900,
+    tabletLarge: 850,
+    tabletNormal: 768,
+    tabletSmall: 600,
+    // Mobile
+    mobileExtraLarge: 480,
+    mobileLarge: 414,
+    mobileNormal: 375,
+    mobileSmall: 320,
+  );
+
+  RefinedBreakpoints _customRefinedBreakPoints;
+
   /// Set the breakPoints which will then be returned through the [breakpoints]
-  void setCustomBreakpoints(ScreenBreakpoints customBreakpoints) {
+  void setCustomBreakpoints(ScreenBreakpoints customBreakpoints,
+      {RefinedBreakpoints customRefinedBreakpoints}) {
     _customBreakPoints = customBreakpoints;
+    if (customRefinedBreakpoints != null) {
+      _customRefinedBreakPoints = customRefinedBreakpoints;
+    }
   }
 
   ScreenBreakpoints get breakpoints =>
       _customBreakPoints ?? _defaultBreakPoints;
+
+  RefinedBreakpoints get refinedBreakpoints =>
+      _customRefinedBreakPoints ?? _defaultRefinedBreakPoints;
 }

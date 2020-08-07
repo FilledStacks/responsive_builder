@@ -12,3 +12,5 @@ enum DeviceScreenType {
   desktop,
   watch
 }
+
+enum RefinedSize { small, normal, large, extraLarge }

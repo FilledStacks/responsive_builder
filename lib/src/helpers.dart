@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:responsive_builder/src/responsive_sizing_config.dart';
 import 'package:responsive_builder/src/sizing_information.dart';
 
+import '../responsive_builder.dart';
 import 'device_screen_type.dart';
 
 /// Returns the [DeviceScreenType] that the application is currently running on
@@ -47,6 +48,154 @@ DeviceScreenType getDeviceType(
   return DeviceScreenType.mobile;
 }
 
+/// Returns the [RefindedSize] for each device that the application is currently running on
+RefinedSize getRefinedSize(
+  Size size, [
+  RefinedBreakpoints refinedBreakpoint,
+]) {
+  DeviceScreenType deviceScreenType = getDeviceType(size);
+  double deviceWidth = size.shortestSide;
+
+  if (kIsWeb) {
+    deviceWidth = size.width;
+  }
+
+  // Replaces the defaults with the user defined definitions
+  if (refinedBreakpoint != null) {
+    if (deviceScreenType == DeviceScreenType.desktop) {
+      if (deviceWidth > refinedBreakpoint.desktopExtraLarge) {
+        return RefinedSize.extraLarge;
+      }
+
+      if (deviceWidth > refinedBreakpoint.desktopLarge) {
+        return RefinedSize.large;
+      }
+
+      if (deviceWidth > refinedBreakpoint.desktopNormal) {
+        return RefinedSize.normal;
+      }
+
+      if (deviceWidth < refinedBreakpoint.desktopSmall) {
+        return RefinedSize.small;
+      }
+    }
+
+    if (deviceScreenType == DeviceScreenType.tablet) {
+      if (deviceWidth > refinedBreakpoint.tabletExtraLarge) {
+        return RefinedSize.extraLarge;
+      }
+
+      if (deviceWidth > refinedBreakpoint.tabletLarge) {
+        return RefinedSize.large;
+      }
+
+      if (deviceWidth > refinedBreakpoint.tabletNormal) {
+        return RefinedSize.normal;
+      }
+
+      if (deviceWidth < refinedBreakpoint.tabletSmall) {
+        return RefinedSize.small;
+      }
+    }
+
+    if (deviceScreenType == DeviceScreenType.mobile) {
+      if (deviceWidth > refinedBreakpoint.mobileExtraLarge) {
+        return RefinedSize.extraLarge;
+      }
+
+      if (deviceWidth > refinedBreakpoint.mobileLarge) {
+        return RefinedSize.large;
+      }
+
+      if (deviceWidth > refinedBreakpoint.mobileNormal) {
+        return RefinedSize.normal;
+      }
+
+      if (deviceWidth < refinedBreakpoint.mobileSmall) {
+        return RefinedSize.small;
+      }
+    }
+
+    if (deviceScreenType == DeviceScreenType.watch) {
+      return RefinedSize.normal;
+    }
+  } else {
+    // If no user defined definitions are passed through use the defaults
+
+    // Desktop
+    if (deviceScreenType == DeviceScreenType.desktop) {
+      if (deviceWidth >=
+          ResponsiveSizingConfig
+              .instance.refinedBreakpoints.desktopExtraLarge) {
+        return RefinedSize.extraLarge;
+      }
+
+      if (deviceWidth >=
+          ResponsiveSizingConfig.instance.refinedBreakpoints.desktopLarge) {
+        return RefinedSize.large;
+      }
+
+      if (deviceWidth >=
+          ResponsiveSizingConfig.instance.refinedBreakpoints.desktopNormal) {
+        return RefinedSize.normal;
+      }
+
+      if (deviceWidth <
+          ResponsiveSizingConfig.instance.refinedBreakpoints.desktopSmall) {
+        return RefinedSize.small;
+      }
+    }
+
+    // Tablet
+    if (deviceScreenType == DeviceScreenType.tablet) {
+      if (deviceWidth >=
+          ResponsiveSizingConfig.instance.refinedBreakpoints.tabletExtraLarge) {
+        return RefinedSize.extraLarge;
+      }
+
+      if (deviceWidth >=
+          ResponsiveSizingConfig.instance.refinedBreakpoints.tabletLarge) {
+        return RefinedSize.large;
+      }
+
+      if (deviceWidth >=
+          ResponsiveSizingConfig.instance.refinedBreakpoints.tabletNormal) {
+        return RefinedSize.normal;
+      }
+
+      if (deviceWidth <
+          ResponsiveSizingConfig.instance.refinedBreakpoints.tabletSmall) {
+        return RefinedSize.small;
+      }
+    }
+
+    // Mobile
+    if (deviceScreenType == DeviceScreenType.mobile) {
+      if (deviceWidth >=
+          ResponsiveSizingConfig.instance.refinedBreakpoints.mobileExtraLarge) {
+        return RefinedSize.extraLarge;
+      }
+
+      if (deviceWidth >=
+          ResponsiveSizingConfig.instance.refinedBreakpoints.mobileLarge) {
+        return RefinedSize.large;
+      }
+
+      if (deviceWidth >=
+          ResponsiveSizingConfig.instance.refinedBreakpoints.mobileNormal) {
+        return RefinedSize.normal;
+      }
+
+      if (deviceWidth <
+          ResponsiveSizingConfig.instance.refinedBreakpoints.mobileSmall) {
+        return RefinedSize.small;
+      }
+    }
+  }
+
+  return RefinedSize.normal;
+}
+
 /// Will return one of the values passed in for the device it's running on
 T getValueForScreenType<T>({
   BuildContext context,
@@ -74,6 +223,45 @@ T getValueForScreenType<T>({
 
   // If none of the layouts above are supplied or we're on the mobile layout then we show the mobile layout
   return mobile;
+}
+
+/// Will return one of the values passed in for the refined size
+T getValueForRefinedSize<T>({
+  BuildContext context,
+  T small,
+  T normal,
+  T large,
+  T extraLarge,
+}) {
+  var refinedSize = getRefinedSize(MediaQuery.of(context).size);
+  // If we're at extra large size
+  if (refinedSize == RefinedSize.extraLarge) {
+    // If we have supplied the extra large layout then display that
+    if (extraLarge != null) return extraLarge;
+    // If no extra large layout is supplied we want to check if we have the size below it and display that
+    if (large != null) return large;
+  }
+
+  if (refinedSize == RefinedSize.large) {
+    // If we have supplied the large layout then display that
+    if (large != null) return large;
+    // If no large layout is supplied we want to check if we have the size below it and display that
+    if (normal != null) return normal;
+  }
+
+  if (refinedSize == RefinedSize.normal) {
+    // If we have supplied the normal layout then display that
+    if (normal != null) return normal;
+    // If no normal layout is supplied we want to check if we have the size below it and display that
+    if (small != null) return small;
+  }
+
+  if (refinedSize == RefinedSize.small && small != null) {
+    return small;
+  }
+
+  // If none of the layouts above are supplied or we're on the normal size layout then we show the normal layout
+  return normal;
 }
 
 class ScreenTypeValueBuilder<T> {
