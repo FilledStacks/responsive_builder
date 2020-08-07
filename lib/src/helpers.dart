@@ -77,7 +77,7 @@ T getValueForScreenType<T>({
 }
 
 class ScreenTypeValueBuilder<T> {
-  @Deprecated('Use better named function getValueForScreenType')
+  @Deprecated('Use better named global function getValueForScreenType')
   T getValueForType({
     BuildContext context,
     T mobile,
