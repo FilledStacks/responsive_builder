@@ -75,10 +75,6 @@ RefinedSize getRefinedSize(
       if (deviceWidth > refinedBreakpoint.desktopNormal) {
         return RefinedSize.normal;
       }
-
-      if (deviceWidth < refinedBreakpoint.desktopSmall) {
-        return RefinedSize.small;
-      }
     }
 
     if (deviceScreenType == DeviceScreenType.tablet) {
@@ -93,10 +89,6 @@ RefinedSize getRefinedSize(
       if (deviceWidth > refinedBreakpoint.tabletNormal) {
         return RefinedSize.normal;
       }
-
-      if (deviceWidth < refinedBreakpoint.tabletSmall) {
-        return RefinedSize.small;
-      }
     }
 
     if (deviceScreenType == DeviceScreenType.mobile) {
@@ -110,10 +102,6 @@ RefinedSize getRefinedSize(
 
       if (deviceWidth > refinedBreakpoint.mobileNormal) {
         return RefinedSize.normal;
-      }
-
-      if (deviceWidth < refinedBreakpoint.mobileSmall) {
-        return RefinedSize.small;
       }
     }
 
@@ -140,11 +128,6 @@ RefinedSize getRefinedSize(
           ResponsiveSizingConfig.instance.refinedBreakpoints.desktopNormal) {
         return RefinedSize.normal;
       }
-
-      if (deviceWidth <
-          ResponsiveSizingConfig.instance.refinedBreakpoints.desktopSmall) {
-        return RefinedSize.small;
-      }
     }
 
     // Tablet
@@ -163,11 +146,6 @@ RefinedSize getRefinedSize(
           ResponsiveSizingConfig.instance.refinedBreakpoints.tabletNormal) {
         return RefinedSize.normal;
       }
-
-      if (deviceWidth >
-          ResponsiveSizingConfig.instance.refinedBreakpoints.mobileExtraLarge) {
-        return RefinedSize.small;
-      }
     }
 
     // Mobile
@@ -185,11 +163,6 @@ RefinedSize getRefinedSize(
       if (deviceWidth >=
           ResponsiveSizingConfig.instance.refinedBreakpoints.mobileNormal) {
         return RefinedSize.normal;
-      }
-
-      if (deviceWidth <
-          ResponsiveSizingConfig.instance.refinedBreakpoints.mobileSmall) {
-        return RefinedSize.small;
       }
     }
   }
@@ -229,7 +202,6 @@ T getValueForScreenType<T>({
 /// Will return one of the values passed in for the refined size
 T getValueForRefinedSize<T>({
   BuildContext context,
-  T small,
   T normal,
   T large,
   T extraLarge,
@@ -253,12 +225,6 @@ T getValueForRefinedSize<T>({
   if (refinedSize == RefinedSize.normal) {
     // If we have supplied the normal layout then display that
     if (normal != null) return normal;
-    // If no normal layout is supplied we want to check if we have the size below it and display that
-    if (small != null) return small;
-  }
-
-  if (refinedSize == RefinedSize.small && small != null) {
-    return small;
   }
 
   // If none of the layouts above are supplied or we're on the normal size layout then we show the normal layout

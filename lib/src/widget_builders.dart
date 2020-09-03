@@ -192,11 +192,6 @@ class RefinedLayoutBuilder extends StatelessWidget {
           if (small != null) return small(context);
         }
 
-        if (sizingInformation.refinedSize == RefinedSize.small &&
-            small != null) {
-          return small(context);
-        }
-
         // If none of the layouts above are supplied or we're on the normal size layout then we show the normal layout
         return normal(context);
       },

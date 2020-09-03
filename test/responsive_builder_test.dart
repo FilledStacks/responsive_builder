@@ -150,21 +150,6 @@ void main() {
 
   group('getRefinedSize - Custom break points -', () {
     test(
-        'When called with desktop size in the small, should return RefinedSize.small',
-        () {
-      ResponsiveSizingConfig.instance.setCustomBreakpoints(
-          ScreenBreakpoints(desktop: 800, tablet: 600, watch: 200));
-      var breakPoint = RefinedBreakpoints(
-          desktopSmall: 850,
-          desktopNormal: 900,
-          desktopLarge: 950,
-          desktopExtraLarge: 1000);
-      var refinedSize =
-          getRefinedSize(Size(801, 1000), refinedBreakpoint: breakPoint);
-      expect(refinedSize, RefinedSize.small);
-    });
-
-    test(
         'When called with desktop size in normal range, should return RefinedSize.normal',
         () {
       ResponsiveSizingConfig.instance.setCustomBreakpoints(
@@ -200,12 +185,7 @@ void main() {
       var refinedSize = getRefinedSize(Size(1921, 1000), isWebOrDesktop: true);
       expect(refinedSize, RefinedSize.normal);
     });
-    test(
-        'When called with desktop size in small range, should return RefinedSize.small',
-        () {
-      var refinedSize = getRefinedSize(Size(949, 1000), isWebOrDesktop: true);
-      expect(refinedSize, RefinedSize.small);
-    });
+
     test(
         'When called with tablet size in extra large range, should return RefinedSize.extraLarge',
         () {
@@ -223,12 +203,6 @@ void main() {
         () {
       var refinedSize = getRefinedSize(Size(769, 1000));
       expect(refinedSize, RefinedSize.normal);
-    });
-    test(
-        'When called with tablet size in small range, should return RefinedSize.small',
-        () {
-      var refinedSize = getRefinedSize(Size(600, 1000));
-      expect(refinedSize, RefinedSize.small);
     });
   });
 }
