@@ -1,3 +1,7 @@
+## 0.3.0
+
+- Adds the refined sizing functionality
+
 ## 0.2.0+2
 
 - Added `getValueForScreenType` functionality to the readme
