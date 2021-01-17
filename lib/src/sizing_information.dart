@@ -25,10 +25,10 @@ class SizingInformation {
   bool get isNormal => refinedSize == RefinedSize.normal;
 
   SizingInformation({
-    this.deviceScreenType,
-    this.refinedSize,
-    this.screenSize,
-    this.localWidgetSize,
+    required this.deviceScreenType,
+    required this.refinedSize,
+    required this.screenSize,
+    required this.localWidgetSize,
   });
 
   @override
@@ -46,9 +46,9 @@ class ScreenBreakpoints {
   final double desktop;
 
   const ScreenBreakpoints({
-    @required this.desktop,
-    @required this.tablet,
-    @required this.watch,
+    required this.desktop,
+    required this.tablet,
+    required this.watch,
   });
 
   @override

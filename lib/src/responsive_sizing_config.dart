@@ -2,13 +2,13 @@ import 'package:responsive_builder/responsive_builder.dart';
 
 /// Keeps the configuration that will determines the breakpoints for different device sizes
 class ResponsiveSizingConfig {
-  static ResponsiveSizingConfig _instance;
+  static ResponsiveSizingConfig? _instance;
   static ResponsiveSizingConfig get instance {
     if (_instance == null) {
       _instance = ResponsiveSizingConfig();
     }
 
-    return _instance;
+    return _instance!;
   }
 
   static const ScreenBreakpoints _defaultBreakPoints = const ScreenBreakpoints(
@@ -17,7 +17,7 @@ class ResponsiveSizingConfig {
     watch: 300,
   );
 
-  ScreenBreakpoints _customBreakPoints;
+  ScreenBreakpoints? _customBreakPoints;
 
   static const RefinedBreakpoints _defaultRefinedBreakPoints =
       const RefinedBreakpoints(
@@ -38,11 +38,13 @@ class ResponsiveSizingConfig {
     mobileSmall: 320,
   );
 
-  RefinedBreakpoints _customRefinedBreakPoints;
+  RefinedBreakpoints? _customRefinedBreakPoints;
 
   /// Set the breakPoints which will then be returned through the [breakpoints]
-  void setCustomBreakpoints(ScreenBreakpoints customBreakpoints,
-      {RefinedBreakpoints customRefinedBreakpoints}) {
+  void setCustomBreakpoints(
+    ScreenBreakpoints? customBreakpoints, {
+    RefinedBreakpoints? customRefinedBreakpoints,
+  }) {
     _customBreakPoints = customBreakpoints;
     if (customRefinedBreakpoints != null) {
       _customRefinedBreakPoints = customRefinedBreakpoints;
