@@ -167,7 +167,7 @@ RefinedSize getRefinedSize(
     }
   }
 
-  return RefinedSize.normal;
+  return RefinedSize.small;
 }
 
 /// Will return one of the values passed in for the device it's running on

@@ -24,6 +24,8 @@ class SizingInformation {
 
   bool get isNormal => refinedSize == RefinedSize.normal;
 
+  bool get isSmall => refinedSize == RefinedSize.small;
+
   SizingInformation({
     required this.deviceScreenType,
     required this.refinedSize,
