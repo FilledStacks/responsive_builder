@@ -150,6 +150,100 @@ void main() {
 
   group('getRefinedSize - Custom break points -', () {
     test(
+        'When called with mobile size in small range, should return RefinedSize.small',
+        () {
+      ResponsiveSizingConfig.instance.setCustomBreakpoints(
+          ScreenBreakpoints(desktop: 800, tablet: 600, watch: 200));
+      var breakPoint = RefinedBreakpoints(
+        mobileSmall: 300,
+        mobileNormal: 370,
+        mobileLarge: 440,
+        mobileExtraLarge: 520,
+      );
+      var refinedSize = getRefinedSize(
+        Size(301, 1000),
+        refinedBreakpoint: breakPoint,
+        isWebOrDesktop: true,
+      );
+      expect(refinedSize, RefinedSize.small);
+    });
+
+    test(
+        'When called with mobile size in normal range, should return RefinedSize.normal',
+        () {
+      ResponsiveSizingConfig.instance.setCustomBreakpoints(
+          ScreenBreakpoints(desktop: 800, tablet: 600, watch: 200));
+      var breakPoint = RefinedBreakpoints(
+        mobileSmall: 300,
+        mobileNormal: 370,
+        mobileLarge: 440,
+        mobileExtraLarge: 520,
+      );
+      var refinedSize = getRefinedSize(
+        Size(371, 1000),
+        refinedBreakpoint: breakPoint,
+        isWebOrDesktop: true,
+      );
+      expect(refinedSize, RefinedSize.normal);
+    });
+
+    test(
+        'When called with mobile size in large range, should return RefinedSize.large',
+        () {
+      ResponsiveSizingConfig.instance.setCustomBreakpoints(
+          ScreenBreakpoints(desktop: 800, tablet: 600, watch: 200));
+      var breakPoint = RefinedBreakpoints(
+        mobileSmall: 300,
+        mobileNormal: 370,
+        mobileLarge: 440,
+        mobileExtraLarge: 520,
+      );
+      var refinedSize = getRefinedSize(
+        Size(441, 1000),
+        refinedBreakpoint: breakPoint,
+        isWebOrDesktop: true,
+      );
+      expect(refinedSize, RefinedSize.large);
+    });
+
+    test(
+        'When called with mobile size in extraLarge range, should return RefinedSize.extraLarge',
+        () {
+      ResponsiveSizingConfig.instance.setCustomBreakpoints(
+          ScreenBreakpoints(desktop: 800, tablet: 600, watch: 200));
+      var breakPoint = RefinedBreakpoints(
+        mobileSmall: 300,
+        mobileNormal: 370,
+        mobileLarge: 440,
+        mobileExtraLarge: 520,
+      );
+      var refinedSize = getRefinedSize(
+        Size(521, 1000),
+        refinedBreakpoint: breakPoint,
+        isWebOrDesktop: true,
+      );
+      expect(refinedSize, RefinedSize.extraLarge);
+    });
+
+    test(
+        'When called with desktop size in small range, should return RefinedSize.small',
+        () {
+      ResponsiveSizingConfig.instance.setCustomBreakpoints(
+          ScreenBreakpoints(desktop: 800, tablet: 600, watch: 200));
+      var breakPoint = RefinedBreakpoints(
+          desktopSmall: 850,
+          desktopNormal: 900,
+          desktopLarge: 950,
+          desktopExtraLarge: 1000);
+      var refinedSize = getRefinedSize(
+        Size(851, 1000),
+        refinedBreakpoint: breakPoint,
+        isWebOrDesktop: true,
+      );
+      expect(refinedSize, RefinedSize.small);
+    });
+
+    test(
         'When called with desktop size in normal range, should return RefinedSize.normal',
         () {
       ResponsiveSizingConfig.instance.setCustomBreakpoints(
@@ -159,9 +253,48 @@ void main() {
           desktopNormal: 900,
           desktopLarge: 950,
           desktopExtraLarge: 1000);
-      var refinedSize =
-          getRefinedSize(Size(851, 1000), refinedBreakpoint: breakPoint);
+      var refinedSize = getRefinedSize(
+        Size(901, 1000),
+        refinedBreakpoint: breakPoint,
+        isWebOrDesktop: true,
+      );
       expect(refinedSize, RefinedSize.normal);
+    });
+
+    test(
+        'When called with desktop size in large range, should return RefinedSize.large',
+        () {
+      ResponsiveSizingConfig.instance.setCustomBreakpoints(
+          ScreenBreakpoints(desktop: 800, tablet: 600, watch: 200));
+      var breakPoint = RefinedBreakpoints(
+          desktopSmall: 850,
+          desktopNormal: 900,
+          desktopLarge: 950,
+          desktopExtraLarge: 1000);
+      var refinedSize = getRefinedSize(
+        Size(951, 1000),
+        refinedBreakpoint: breakPoint,
+        isWebOrDesktop: true,
+      );
+      expect(refinedSize, RefinedSize.large);
+    });
+
+    test(
+        'When called with desktop size in extraLarge range, should return RefinedSize.extraLarge',
+        () {
+      ResponsiveSizingConfig.instance.setCustomBreakpoints(
+          ScreenBreakpoints(desktop: 800, tablet: 600, watch: 200));
+      var breakPoint = RefinedBreakpoints(
+          desktopSmall: 850,
+          desktopNormal: 900,
+          desktopLarge: 950,
+          desktopExtraLarge: 1000);
+      var refinedSize = getRefinedSize(
+        Size(1001, 1000),
+        refinedBreakpoint: breakPoint,
+        isWebOrDesktop: true,
+      );
+      expect(refinedSize, RefinedSize.extraLarge);
     });
   });
 

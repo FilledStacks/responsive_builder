@@ -9,7 +9,7 @@ import 'device_screen_type.dart';
 /// Returns the [DeviceScreenType] that the application is currently running on
 DeviceScreenType getDeviceType(
   Size size, [
-  ScreenBreakpoints breakpoint,
+  ScreenBreakpoints? breakpoint,
 ]) {
   double deviceWidth = size.shortestSide;
 
@@ -51,7 +51,7 @@ DeviceScreenType getDeviceType(
 /// Returns the [RefindedSize] for each device that the application is currently running on
 RefinedSize getRefinedSize(
   Size size, {
-  RefinedBreakpoints refinedBreakpoint,
+  RefinedBreakpoints? refinedBreakpoint,
   bool isWebOrDesktop = kIsWeb,
 }) {
   DeviceScreenType deviceScreenType = getDeviceType(size);
@@ -167,16 +167,16 @@ RefinedSize getRefinedSize(
     }
   }
 
-  return RefinedSize.normal;
+  return RefinedSize.small;
 }
 
 /// Will return one of the values passed in for the device it's running on
 T getValueForScreenType<T>({
-  BuildContext context,
-  T mobile,
-  T tablet,
-  T desktop,
-  T watch,
+  required BuildContext context,
+  required T mobile,
+  T? tablet,
+  T? desktop,
+  T? watch,
 }) {
   var deviceScreenType = getDeviceType(MediaQuery.of(context).size);
   // If we're at desktop size
@@ -201,10 +201,10 @@ T getValueForScreenType<T>({
 
 /// Will return one of the values passed in for the refined size
 T getValueForRefinedSize<T>({
-  BuildContext context,
-  T normal,
-  T large,
-  T extraLarge,
+  required BuildContext context,
+  required T normal,
+  T? large,
+  T? extraLarge,
 }) {
   var refinedSize = getRefinedSize(MediaQuery.of(context).size);
   // If we're at extra large size
@@ -234,17 +234,18 @@ T getValueForRefinedSize<T>({
 class ScreenTypeValueBuilder<T> {
   @Deprecated('Use better named global function getValueForScreenType')
   T getValueForType({
-    BuildContext context,
-    T mobile,
-    T tablet,
-    T desktop,
-    T watch,
+    required BuildContext context,
+    required T mobile,
+    T? tablet,
+    T? desktop,
+    T? watch,
   }) {
     return getValueForScreenType(
-        context: context,
-        mobile: mobile,
-        tablet: tablet,
-        desktop: desktop,
-        watch: watch);
+      context: context,
+      mobile: mobile,
+      tablet: tablet,
+      desktop: desktop,
+      watch: watch,
+    );
   }
 }

@@ -13,4 +13,4 @@ enum DeviceScreenType {
   watch
 }
 
-enum RefinedSize { normal, large, extraLarge }
+enum RefinedSize { small, normal, large, extraLarge }
