@@ -1,3 +1,7 @@
+## 0.4.0-nullsafety.1
+
+- Adds null safety and correct small refined sizing
+
 ## 0.3.0
 
 - Adds the refined sizing functionality
