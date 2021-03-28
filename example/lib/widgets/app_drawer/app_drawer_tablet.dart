@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'app_drawer.dart';
 
 class AppDrawerTabletPortrait extends StatelessWidget {
-  const AppDrawerTabletPortrait({Key key}) : super(key: key);
+  const AppDrawerTabletPortrait({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class AppDrawerTabletPortrait extends StatelessWidget {
 }
 
 class AppDrawerTabletLandscape extends StatelessWidget {
-  const AppDrawerTabletLandscape({Key key}) : super(key: key);
+  const AppDrawerTabletLandscape({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

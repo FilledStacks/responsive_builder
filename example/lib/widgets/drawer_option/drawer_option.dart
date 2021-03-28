@@ -5,10 +5,10 @@ import 'drawer_option_mobile.dart';
 import 'drawer_option_tablet.dart';
 
 class DrawerOption extends StatelessWidget {
-  final String title;
-  final IconData iconData;
+  final String? title;
+  final IconData? iconData;
   const DrawerOption({
-    Key key,
+    Key? key,
     this.title,
     this.iconData,
   }) : super(key: key);

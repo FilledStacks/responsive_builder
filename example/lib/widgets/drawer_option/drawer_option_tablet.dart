@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class DrawerOptionTabletPortrait extends StatelessWidget {
-  final String title;
-  final IconData iconData;
+  final String? title;
+  final IconData? iconData;
   const DrawerOptionTabletPortrait({
-    Key key,
+    Key? key,
     this.title,
     this.iconData,
   }) : super(key: key);
@@ -21,7 +21,7 @@ class DrawerOptionTabletPortrait extends StatelessWidget {
             iconData,
             size: 45,
           ),
-          Text(title, style: TextStyle(fontSize: 20)),
+          Text(title!, style: TextStyle(fontSize: 20)),
         ],
       ),
     );

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class HomeMobilePortrait extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  HomeMobilePortrait({Key key}) : super(key: key);
+  HomeMobilePortrait({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class HomeMobilePortrait extends StatelessWidget {
             child: IconButton(
               icon: Icon(Icons.menu, size: 30),
               onPressed: () {
-                _scaffoldKey.currentState.openDrawer();
+                _scaffoldKey.currentState!.openDrawer();
               },
             ),
           )
@@ -31,7 +31,7 @@ class HomeMobilePortrait extends StatelessWidget {
 }
 
 class HomeMobileLandscape extends StatelessWidget {
-  const HomeMobileLandscape({Key key}) : super(key: key);
+  const HomeMobileLandscape({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
