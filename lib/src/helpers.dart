@@ -10,10 +10,11 @@ import 'device_screen_type.dart';
 DeviceScreenType getDeviceType(
   Size size, [
   ScreenBreakpoints? breakpoint,
+  bool? isWebOrDesktop,
 ]) {
   double deviceWidth = size.shortestSide;
 
-  if (kIsWeb) {
+  if (isWebOrDesktop ?? kIsWeb) {
     deviceWidth = size.width;
   }
 
@@ -52,12 +53,12 @@ DeviceScreenType getDeviceType(
 RefinedSize getRefinedSize(
   Size size, {
   RefinedBreakpoints? refinedBreakpoint,
-  bool isWebOrDesktop = kIsWeb,
+  bool? isWebOrDesktop,
 }) {
   DeviceScreenType deviceScreenType = getDeviceType(size);
   double deviceWidth = size.shortestSide;
 
-  if (isWebOrDesktop) {
+  if (isWebOrDesktop ?? kIsWeb) {
     deviceWidth = size.width;
   }
 

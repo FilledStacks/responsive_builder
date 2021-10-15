@@ -18,12 +18,14 @@ class ResponsiveBuilder extends StatelessWidget {
 
   final ScreenBreakpoints? breakpoints;
   final RefinedBreakpoints? refinedBreakpoints;
+  final bool? isWebOrDesktop;
 
   const ResponsiveBuilder({
     Key? key,
     required this.builder,
     this.breakpoints,
     this.refinedBreakpoints,
+    this.isWebOrDesktop,
   }) : super(key: key);
 
   @override
@@ -31,11 +33,11 @@ class ResponsiveBuilder extends StatelessWidget {
     return LayoutBuilder(builder: (context, boxConstraints) {
       var mediaQuery = MediaQuery.of(context);
       var sizingInformation = SizingInformation(
-        deviceScreenType: getDeviceType(mediaQuery.size, breakpoints),
-        refinedSize: getRefinedSize(
-          mediaQuery.size,
-          refinedBreakpoint: refinedBreakpoints,
-        ),
+        deviceScreenType:
+            getDeviceType(mediaQuery.size, breakpoints, isWebOrDesktop),
+        refinedSize: getRefinedSize(mediaQuery.size,
+            refinedBreakpoint: refinedBreakpoints,
+            isWebOrDesktop: isWebOrDesktop),
         screenSize: mediaQuery.size,
         localWidgetSize:
             Size(boxConstraints.maxWidth, boxConstraints.maxHeight),

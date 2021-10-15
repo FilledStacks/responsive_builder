@@ -1,3 +1,6 @@
+## Unreleased
+- Add `isWebOrDesktop` to ResponsiveBuilder. This will default to kIsWeb. 
+
 ## 0.4.0-nullsafety.1
 
 - Adds null safety and correct small refined sizing
