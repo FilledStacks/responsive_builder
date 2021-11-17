@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/src/responsive_sizing_config.dart';
@@ -15,6 +17,11 @@ DeviceScreenType getDeviceType(
 
   if (kIsWeb) {
     deviceWidth = size.width;
+  } else {
+    //Check if the device is a desktop, should not be web
+    if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
+      deviceWidth = size.width;
+    }
   }
 
   // Replaces the defaults with the user defined definitions
