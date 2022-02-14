@@ -72,6 +72,18 @@ OrientationLayoutBuilder(
 
 This will return a different coloured container when you swap orientations for your device. In a more readable manner than checking the orientation with a conditional.
 
+Sometimes you want your app to stay in a certain orientation. use `mode` property in `OrientationLayoutBuilder` to enforce this.
+
+```dart
+OrientationLayoutBuilder(
+  /// default mode is 'auto'
+  mode: info.isMobile
+    ? OrientationLayoutBuilderMode.portrait
+    : OrientationLayoutBuilderMode.auto,
+  ...
+),
+```
+
 ## Screen Type Layout
 
 This widget is similar to the Orientation Layout Builder in that it takes in Widgets that are named and displayed for different screen types.

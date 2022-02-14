@@ -45,15 +45,23 @@ class ResponsiveBuilder extends StatelessWidget {
   }
 }
 
+enum OrientationLayoutBuilderMode {
+  auto,
+  landscape,
+  portrait,
+}
+
 /// Provides a builder function for a landscape and portrait widget
 class OrientationLayoutBuilder extends StatelessWidget {
   final WidgetBuilder? landscape;
   final WidgetBuilder portrait;
+  final OrientationLayoutBuilderMode mode;
 
   const OrientationLayoutBuilder({
     Key? key,
     this.landscape,
     required this.portrait,
+    this.mode = OrientationLayoutBuilderMode.auto,
   }) : super(key: key);
 
   @override
@@ -61,7 +69,9 @@ class OrientationLayoutBuilder extends StatelessWidget {
     return Builder(
       builder: (context) {
         var orientation = MediaQuery.of(context).orientation;
-        if (orientation == Orientation.landscape) {
+        if (mode != OrientationLayoutBuilderMode.portrait &&
+            (orientation == Orientation.landscape ||
+                mode == OrientationLayoutBuilderMode.landscape)) {
           if (landscape != null) {
             return landscape!(context);
           }

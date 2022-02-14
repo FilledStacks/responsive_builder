@@ -1,3 +1,7 @@
+## 0.4.2
+
+- Added optional override property in orientation builder
+
 ## 0.4.0-nullsafety.1
 
 - Adds null safety and correct small refined sizing
