@@ -1,10 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_builder/src/responsive_sizing_config.dart';
-import 'package:responsive_builder/src/sizing_information.dart';
 
 import '../responsive_builder.dart';
-import 'device_screen_type.dart';
 
 /// Returns the [DeviceScreenType] that the application is currently running on
 DeviceScreenType getDeviceType(
@@ -226,8 +223,6 @@ T getValueForRefinedSize<T>({
   if (refinedSize == RefinedSize.normal) {
     // If we have supplied the normal layout then display that
     if (normal != null) return normal;
-    // If no normal layout is supplied we want to check if we have the size below it and display that
-    if (small != null) return small;
   }
 
   if (refinedSize == RefinedSize.small) {
