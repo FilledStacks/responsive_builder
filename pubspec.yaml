@@ -3,6 +3,9 @@ description: A set of widgets that can be used to define a readable responsive U
 version: 0.4.3
 homepage: https://github.com/FilledStacks/responsive_builder
 
+funding:
+  - https://ko-fi.com/filledstacks
+
 environment:
   sdk: ">=2.12.0-0 <3.0.0"
 

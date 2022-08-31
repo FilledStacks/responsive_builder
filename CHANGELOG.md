@@ -1,6 +1,8 @@
 ## 0.4.3
 
 - Added small size for getValueForRefinedSize
+- Adds funding link to coffee
+
 ## 0.4.2
 
 - Added optional override property in orientation builder
