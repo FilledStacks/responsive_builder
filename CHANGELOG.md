@@ -1,4 +1,4 @@
-## 0.5.0-beta.1
+## 0.5.0
 
 ### New Feature
 Adds the `ScrollTransform` functionality which allows you to more easily create scroll effects based on the scrolling position.
