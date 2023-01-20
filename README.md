@@ -1,4 +1,4 @@
-[![Responsive UI in Flutter Banner](./responsive-builder-banner.jpg)](https://youtu.be/neRnM_SiTfA)
+[![Responsive UI in Flutter Banner](https://github.com/FilledStacks/responsive_builder/blob/master/responsive-builder-banner.jpeg)](https://youtu.be/neRnM_SiTfA)
 
 # Responsive Builder 💻➡️🖥➡️📱➡️⌚️
 

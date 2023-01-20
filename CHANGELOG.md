@@ -1,3 +1,7 @@
+## 0.5.0+1
+
+- Adds banner to readme
+
 ## 0.5.0
 
 ### New Feature
