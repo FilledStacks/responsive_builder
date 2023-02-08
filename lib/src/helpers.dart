@@ -15,11 +15,7 @@ DeviceScreenType getDeviceType(
 ]) {
   double deviceWidth = size.shortestSide;
 
-  if (kIsWeb) {
-    deviceWidth = size.width;
-  } else {
-    //Check if the device is a desktop, should not be web
-    if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
+    if (kIsWeb || Platform.isMacOS || Platform.isWindows || Platform.isLinux) { 
       deviceWidth = size.width;
     }
   }
