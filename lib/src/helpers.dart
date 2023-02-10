@@ -12,9 +12,8 @@ DeviceScreenType getDeviceType(
 ]) {
   double deviceWidth = size.shortestSide;
 
-    if (kIsWeb || Platform.isMacOS || Platform.isWindows || Platform.isLinux) { 
-      deviceWidth = size.width;
-    }
+  if (kIsWeb || Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
+    deviceWidth = size.width;
   }
 
   // Replaces the defaults with the user defined definitions

@@ -1,3 +1,7 @@
+## 0.5.1
+
+- Adds checks to ensure desktop returns as Flutter web
+
 ## 0.5.0+1
 
 - Adds banner to readme
