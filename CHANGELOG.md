@@ -1,3 +1,11 @@
+## 0.6.0
+
+### New Feature
+Adds responsive sizing by using the `ResponsiveApp` widget at the highest level which allows:
+- Using `20.screenHeight` / `number.screenHeight` shorthand to get the percentage of the Screen Height
+- The same exists for the `screenWidth`
+- There are also shorthand extensions for both. `screenHeight` => `sh` and `screenWidth` => `sw`
+
 ## 0.5.1
 
 - Adds checks to ensure desktop returns as Flutter web

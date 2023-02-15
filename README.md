@@ -213,6 +213,33 @@ getValueForScreenType<bool>(
 
 That will return true on tablet devices and false on mobile.
 
+## Responsive Sizing
+
+In addition to providing specific layouts per device type there's also the requirement to size items based on the screen width or height. To use this functionality we added some responsive extensions. To use this wrap your Material or Cupertino App with the `ResponsiveApp` widget. 
+
+```dart
+ResponsiveApp(
+  builder: (context) => MaterialApp(
+    ...
+  )
+)
+```
+
+This is required to use the following functionality. 
+
+### Responsive Sizing
+
+To use the responsive sizing all you need to do is the following. 
+
+```dart
+import 'package:responsive_builder/responsive_builder.dart';
+
+SizedBox(height: 30.screenHeight); // Or sh for shorthand
+Text('respond to width', style: TextStyle(fontSize: 10.sw));
+```
+
+Use the number you want as the percentage and call the `screenHeight` or `screenWidth` extension. These also have shorthand extensions `sh` and `sw`.
+
 ## Contribution
 
 1. Fork it!
