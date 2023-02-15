@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/src/helpers.dart';
 import 'package:responsive_builder/src/sizing_information.dart';
