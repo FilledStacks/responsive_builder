@@ -2,14 +2,21 @@ import 'package:flutter/material.dart';
 
 /// Wrap your app with this widget if you want to use the responsive sizing extension
 class ResponsiveApp extends StatelessWidget {
-  const ResponsiveApp({Key? key, required this.builder}) : super(key: key);
   final Widget Function(BuildContext) builder;
+
+  /// Tells ResponsiveApp if we prefer desktop or mobile when a layout is not supplied
+  final bool preferDesktop;
+
+  const ResponsiveApp(
+      {Key? key, required this.builder, this.preferDesktop = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
       return OrientationBuilder(builder: (context, orientation) {
         ResponsiveAppUtil.setScreenSize(constraints, orientation);
+        ResponsiveAppUtil.preferDesktop = preferDesktop;
         return builder(context);
       });
     });
@@ -35,6 +42,7 @@ extension ResponsiveAppExtensions on num {
 class ResponsiveAppUtil {
   static late double height;
   static late double width;
+  static late bool preferDesktop;
 
   /// Saves the screenSzie for access through the extensions later
   static void setScreenSize(

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:responsive_builder/src/helpers.dart';
-import 'package:responsive_builder/src/sizing_information.dart';
 
-import 'device_screen_type.dart';
+import '../responsive_builder.dart';
 
 typedef WidgetBuilder = Widget Function(BuildContext);
 
@@ -94,7 +92,7 @@ class ScreenTypeLayout extends StatelessWidget {
   final ScreenBreakpoints? breakpoints;
 
   final WidgetBuilder? watch;
-  final WidgetBuilder mobile;
+  final WidgetBuilder? mobile;
   final WidgetBuilder? tablet;
   final WidgetBuilder? desktop;
 
@@ -109,16 +107,30 @@ class ScreenTypeLayout extends StatelessWidget {
         this.mobile = _builderOrNull(mobile)!,
         this.tablet = _builderOrNull(tablet),
         this.desktop = _builderOrNull(desktop),
-        super(key: key);
+        super(key: key) {
+    _checkIfMobileOrDesktopIsSupplied();
+  }
 
-  const ScreenTypeLayout.builder({
+  ScreenTypeLayout.builder({
     Key? key,
     this.breakpoints,
     this.watch,
-    required this.mobile,
+    this.mobile,
     this.tablet,
     this.desktop,
-  }) : super(key: key);
+  }) : super(key: key) {
+    _checkIfMobileOrDesktopIsSupplied();
+  }
+
+  void _checkIfMobileOrDesktopIsSupplied() {
+    final hasMobileLayout = mobile != null;
+    final hasDesktopLayout = desktop != null;
+
+    assert(
+      hasMobileLayout || hasDesktopLayout,
+      'You should supply either a mobile layout or a desktop layout. If you don\'t need two layouts then remove this widget and use the widget you want to use directly. ',
+    );
+  }
 
   static WidgetBuilder? _builderOrNull(Widget? widget) {
     return widget == null ? null : ((_) => widget);
@@ -147,7 +159,10 @@ class ScreenTypeLayout extends StatelessWidget {
         }
 
         // If none of the layouts above are supplied or we're on the mobile layout then we show the mobile layout
-        return mobile(context);
+
+        return ResponsiveAppUtil.preferDesktop
+            ? desktop!(context)
+            : mobile!(context);
       },
     );
   }
