@@ -96,6 +96,9 @@ class ScreenTypeLayout extends StatelessWidget {
   final WidgetBuilder? tablet;
   final WidgetBuilder? desktop;
 
+  @Deprecated(
+    'Use ScreenTypeLayout.builder instead for performance improvements',
+  )
   ScreenTypeLayout({
     Key? key,
     this.breakpoints,
@@ -158,11 +161,11 @@ class ScreenTypeLayout extends StatelessWidget {
           return watch!(context);
         }
 
-        // If none of the layouts above are supplied or we're on the mobile layout then we show the mobile layout
+        // If none of the layouts above are supplied we use the prefered layout based on the flag
+        final buildDesktopLayout =
+            ResponsiveAppUtil.preferDesktop && desktop != null;
 
-        return ResponsiveAppUtil.preferDesktop
-            ? desktop!(context)
-            : mobile!(context);
+        return buildDesktopLayout ? desktop!(context) : mobile!(context);
       },
     );
   }

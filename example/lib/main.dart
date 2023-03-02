@@ -8,12 +8,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ResponsiveApp(
-        preferDesktop: true,
-        builder: (context) {
-          return MaterialApp(
-            title: 'Flutter Demo',
-            home: HomeView(),
-          );
-        });
+      builder: (context) {
+        return MaterialApp(
+          title: 'Flutter Demo',
+          home: HomeView(),
+        );
+      },
+    );
   }
 }
