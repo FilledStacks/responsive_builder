@@ -161,6 +161,10 @@ class ScreenTypeLayout extends StatelessWidget {
           return watch!(context);
         }
 
+        if (sizingInformation.deviceScreenType == DeviceScreenType.mobile) {
+          if (mobile != null) return mobile!(context);
+        }
+
         // If none of the layouts above are supplied we use the prefered layout based on the flag
         final buildDesktopLayout =
             ResponsiveAppUtil.preferDesktop && desktop != null;

@@ -1,3 +1,7 @@
+## 0.6.2
+
+- Fixes bug with preferDesktop where it always returns desktop UI even if there is a mobile UI.
+
 ## 0.6.1
 
 - Adds `preferDesktop` to `ResponsiveApp` which tells the builders that if there's no layout supplied for the current size prefer the desktop over the mobileLayout. Default value is `false` to maintain mobile first behaviour.
