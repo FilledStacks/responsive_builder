@@ -1,3 +1,7 @@
+## 0.6.3
+
+- Fixes bug with preferDesktop and `getValueForScreenType`
+
 ## 0.6.2
 
 - Fixes bug with preferDesktop where it always returns desktop UI even if there is a mobile UI.
