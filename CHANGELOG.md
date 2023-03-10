@@ -1,3 +1,8 @@
+
+## 0.6.4
+
+- Fixes #48
+
 ## 0.6.3
 
 - Fixes bug with preferDesktop and `getValueForScreenType`

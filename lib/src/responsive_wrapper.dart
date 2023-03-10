@@ -42,7 +42,7 @@ extension ResponsiveAppExtensions on num {
 class ResponsiveAppUtil {
   static late double height;
   static late double width;
-  static late bool preferDesktop;
+  static bool preferDesktop = false;
 
   /// Saves the screenSzie for access through the extensions later
   static void setScreenSize(
