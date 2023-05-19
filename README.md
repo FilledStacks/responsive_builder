@@ -96,7 +96,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 
 // Construct and pass in a widget per screen type
 ScreenTypeLayout(
-  mobile: Container(color:Colors.blue)
+  mobile: Container(color:Colors.blue),
   tablet: Container(color: Colors.yellow),
   desktop: Container(color: Colors.red),
   watch: Container(color: Colors.purple),
