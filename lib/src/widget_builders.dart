@@ -26,14 +26,14 @@ class ResponsiveBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, boxConstraints) {
-      var mediaQuery = MediaQuery.of(context);
+      var size = MediaQuery.sizeOf(context);
       var sizingInformation = SizingInformation(
-        deviceScreenType: getDeviceType(mediaQuery.size, breakpoints),
+        deviceScreenType: getDeviceType(size, breakpoints),
         refinedSize: getRefinedSize(
-          mediaQuery.size,
+          size,
           refinedBreakpoint: refinedBreakpoints,
         ),
-        screenSize: mediaQuery.size,
+        screenSize: size,
         localWidgetSize:
             Size(boxConstraints.maxWidth, boxConstraints.maxHeight),
       );
@@ -65,7 +65,7 @@ class OrientationLayoutBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) {
-        var orientation = MediaQuery.of(context).orientation;
+        var orientation = MediaQuery.orientationOf(context);
         if (mode != OrientationLayoutBuilderMode.portrait &&
             (orientation == Orientation.landscape ||
                 mode == OrientationLayoutBuilderMode.landscape)) {

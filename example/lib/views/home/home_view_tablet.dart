@@ -12,7 +12,7 @@ class HomeViewTablet extends StatelessWidget {
       ),
       AppDrawer()
     ];
-    var orientation = MediaQuery.of(context).orientation;
+    var orientation = MediaQuery.orientationOf(context);
     return Scaffold(
       body: orientation == Orientation.portrait
           ? Column(children: children)

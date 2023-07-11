@@ -168,7 +168,7 @@ Container(
 What if you ONLY want to update the padding based on the device screen size. You could do.
 
 ```dart
-var deviceType = getDeviceType(MediaQuery.of(context).size);
+var deviceType = getDeviceType(MediaQuery.sizeOf(context));
 var paddingValue = 0;
 switch(deviceType) {
   case DeviceScreenType.desktop:
