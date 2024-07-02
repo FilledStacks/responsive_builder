@@ -1,3 +1,7 @@
+## 0.8.0
+
+Adds comparison operators to DeviceScreenType and RefinedSize, for convenience.
+
 ## 0.7.0
 
 - Fixes #50
