@@ -1,3 +1,7 @@
+## 0.7.2
+
+- Select the web device-width helper with `dart.library.js_interop` so Wasm builds no longer compile the `dart:io` implementation.
+
 ## 0.7.1
 
 - Fixes [#53](https://github.com/FilledStacks/responsive_builder/issues/53)
