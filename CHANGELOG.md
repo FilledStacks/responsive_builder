@@ -1,3 +1,7 @@
+## 0.7.1
+
+- Fixes [#53](https://github.com/FilledStacks/responsive_builder/issues/53)
+
 ## 0.7.0
 
 - Fixes #50
