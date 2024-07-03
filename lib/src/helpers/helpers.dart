@@ -1,20 +1,16 @@
-import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
-import '../responsive_builder.dart';
+import 'device_width.dart' if (dart.library.js) 'device_width_web.dart'
+    as width;
 
 /// Returns the [DeviceScreenType] that the application is currently running on
 DeviceScreenType getDeviceType(
   Size size, [
   ScreenBreakpoints? breakpoint,
 ]) {
-  double deviceWidth = size.shortestSide;
-
-  if (kIsWeb || Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
-    deviceWidth = size.width;
-  }
+  double deviceWidth = width.deviceWidth(size);
 
   // Replaces the defaults with the user defined definitions
   if (breakpoint != null) {
