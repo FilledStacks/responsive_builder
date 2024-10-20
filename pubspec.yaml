@@ -1,6 +1,6 @@
 name: responsive_builder
 description: A set of widgets that can be used to define a readable responsive UI for widgets.
-version: 0.7.1
+version: 0.8.0
 homepage: https://github.com/FilledStacks/responsive_builder
 
 funding:

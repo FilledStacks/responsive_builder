@@ -1,3 +1,7 @@
+## 0.8.0
+
+Adds comparison operators to DeviceScreenType and RefinedSize, for convenience.
+
 ## 0.7.1
 
 - Fixes [#53](https://github.com/FilledStacks/responsive_builder/issues/53)
