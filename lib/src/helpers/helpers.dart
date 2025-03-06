@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import 'device_width.dart' if (dart.library.js) 'device_width_web.dart'
+import 'device_width.dart' if (dart.library.js_interop) 'device_width_web.dart'
     as width;
 
 /// Returns the [DeviceScreenType] that the application is currently running on
