@@ -1,16 +1,16 @@
 enum DeviceScreenType {
-  @Deprecated('Use lowercase version')
-  Mobile,
-  @Deprecated('Use lowercase version')
-  Tablet,
-  @Deprecated('Use lowercase version')
-  Desktop,
+  watch,
   @Deprecated('Use lowercase version')
   Watch,
   mobile,
+  @Deprecated('Use lowercase version')
+  Mobile,
   tablet,
+  @Deprecated('Use lowercase version')
+  Tablet,
   desktop,
-  watch
+  @Deprecated('Use lowercase version')
+  Desktop,
 }
 
 enum RefinedSize { small, normal, large, extraLarge }
