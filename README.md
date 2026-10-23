@@ -18,6 +18,16 @@ Add responsive_builder as dependency to your pubspec file.
 responsive_builder:
 ```
 
+### Web: CanvasKit + Wasm
+
+This package is compatible with Flutter web **CanvasKit** (JS) and **Wasm** (Skwasm) dual builds. Use a current Flutter web bootstrap (`flutter_bootstrap.js` in `web/index.html`), then:
+
+```
+flutter build web --wasm
+```
+
+That produces a single build that prefers Wasm when the browser supports it and falls back to the JS/CanvasKit bundle otherwise.
+
 ## Usage
 
 This package provides a widget called `ResponsiveBuilder` that provides you with a builder function that returns the current `SizingInformation`. The `SizingInformation` includes the `DeviceScreenType`, `screenSize` and `localWidgetSize`. This can be used for fine grained responsive control from a view level down to per widget responsive level.

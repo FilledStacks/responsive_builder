@@ -1,3 +1,10 @@
+## 1.0.0
+
+- WebAssembly (Wasm / Skwasm) + CanvasKit dual-compile support:
+  - Removed `dart:io` and `dart.library.js` conditional imports that broke dart2wasm
+  - Device width detection now uses `kIsWeb` / `defaultTargetPlatform` (works on JS and Wasm)
+- Requires Flutter `>=3.44.0` / Dart `^3.12.0`
+
 ## 0.7.1
 
 - Fixes [#53](https://github.com/FilledStacks/responsive_builder/issues/53)
